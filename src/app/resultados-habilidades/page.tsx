@@ -75,7 +75,7 @@ export default function ResultadosHabilidadesPage() {
             <div className="flex flex-wrap items-center gap-4">
               {/* Seletor de Ano */}
               <div className="flex bg-slate-100 p-1 rounded-xl border border-slate-200 mr-2">
-                {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((ano) => (
+                {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((ano: number) => (
                   <button
                     key={ano}
                     onClick={() => setSelectedAno(ano)}
@@ -92,7 +92,7 @@ export default function ResultadosHabilidadesPage() {
 
               {/* Filtro Componente */}
               <div className="flex bg-slate-100 p-1.5 rounded-2xl border border-slate-200">
-                {(currentAnoData?.componentes_curriculares as string[] || []).map((comp) => (
+                {(currentAnoData?.componentes_curriculares as string[] || []).map((comp: string) => (
                   <button
                     key={comp}
                     onClick={() => setSelectedComponente(comp)}
@@ -134,7 +134,7 @@ export default function ResultadosHabilidadesPage() {
                 <Info size={14} />
                 Níveis:
               </div>
-              {["Excelente (≥ 90%)", "Bom (80-89%)", "Regular (70-79%)", "Atenção (60-69%)", "Crítico (< 60%)"].map((label) => (
+              {["Excelente (≥ 90%)", "Bom (80-89%)", "Regular (70-79%)", "Atenção (60-69%)", "Crítico (< 60%)"].map((label: string) => (
                 <div key={label} className="flex items-center gap-2">
                   <div className={`w-3 h-3 rounded-md ${getLegendColor(label)}`} />
                   <span className="text-[10px] font-bold text-slate-600 whitespace-nowrap">{label.split(" (")[0]}</span>
@@ -175,7 +175,7 @@ export default function ResultadosHabilidadesPage() {
                           </div>
                         </td>
                         {(filteredQuestoes as any[]).map((q: any) => {
-                          const hData = (unidade.habilidades as any[]).find(h => h.questao === q.questao);
+                          const hData = (unidade.habilidades as any[]).find((h: any) => h.questao === q.questao);
                           // Garantir que pct seja um número válido, mesmo se hData ou rendimento_pct for null
                           const pct = (hData && typeof hData.rendimento_pct === "number") ? hData.rendimento_pct : 0;
                           return (
@@ -215,7 +215,7 @@ export default function ResultadosHabilidadesPage() {
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredQuestoes.slice(0, 6).map((q, i) => (
+              {(filteredQuestoes as any[]).slice(0, 6).map((q: any, i: number) => (
                 <div key={i} className="bg-white p-8 rounded-[32px] border border-slate-200 shadow-sm group hover:border-blue-400 transition-all">
                   <div className="flex items-start justify-between mb-6">
                     <div className="p-4 rounded-2xl bg-blue-50 text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors">

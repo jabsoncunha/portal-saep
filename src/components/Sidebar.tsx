@@ -69,7 +69,7 @@ export default function Sidebar() {
 
       {/* Nav */}
       <nav className="flex-1 px-4 space-y-2 overflow-y-auto custom-scrollbar">
-        {menuItems.map((item) => {
+        {menuItems.map((item: any) => {
           const Icon = item.icon;
           const isActive = pathname === item.href;
           const isLocked = !item.public && !isAuthenticated;
@@ -101,7 +101,7 @@ export default function Sidebar() {
         })}
 
         <div className="pt-2 space-y-1">
-          {documents.map((doc) => {
+          {documents.map((doc: any) => {
             const Icon = doc.icon;
             const isActive = pathname === doc.href;
 

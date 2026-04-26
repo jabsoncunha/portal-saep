@@ -20,7 +20,7 @@ const defaultItems = [
   { title: "DASHBOARD", icon: LayoutDashboard, color: "bg-orange-500", href: "#" },
 ];
 
-const assessmentsData = ["2026", "2025", "2024", "2023"].map(year => ({
+const assessmentsData = ["2026", "2025", "2024", "2023"].map((year: string) => ({
   year,
   sections: [
     { title: `AVALIAÇÃO DIAGNÓSTICA - ${year}`, items: defaultItems },
@@ -31,7 +31,7 @@ const assessmentsData = ["2026", "2025", "2024", "2023"].map(year => ({
 }));
 
 export default function ResultadosPage() {
-  const years = assessmentsData.map(d => d.year);
+  const years = assessmentsData.map((d: any) => d.year);
 
   const scrollToYear = (year: string) => {
     const element = document.getElementById(`year-${year}`);
@@ -58,7 +58,7 @@ export default function ResultadosPage() {
           
           <div className="flex items-center gap-4">
             <div className="flex bg-slate-100 p-2 rounded-[24px] border border-slate-200 shadow-inner">
-              {assessmentsData.map((yearData) => {
+              {assessmentsData.map((yearData: any) => {
                 const yearColorMap: Record<string, string> = {
                   "2026": "hover:bg-[#00d2ff] hover:text-white text-[#00d2ff]",
                   "2025": "hover:bg-[#FFD200] hover:text-white text-[#FFD200]",
@@ -84,7 +84,7 @@ export default function ResultadosPage() {
 
       {/* Conteúdo Principal */}
       <main className="px-6 py-16 space-y-48 w-full max-w-[1800px]">
-        {assessmentsData.map((yearData) => {
+        {assessmentsData.map((yearData: any) => {
           const yearColorMap: Record<string, string> = {
             "2026": "text-[#00d2ff]",
             "2025": "text-[#FFD200]",
@@ -104,7 +104,7 @@ export default function ResultadosPage() {
               </div>
 
               <div className="space-y-32">
-                {yearData.sections.map((assessment, index) => (
+                {yearData.sections.map((assessment: any, index: number) => (
                   <section key={index} className="space-y-16">
                     <div className="flex items-center gap-10">
                       <h2 className={`text-base font-black uppercase tracking-[0.3em] whitespace-nowrap px-8 py-3 rounded-2xl border shadow-sm ${yearColor.replace('text-', 'bg-').replace('[', '').replace(']', '')}/5 ${yearColor.replace('text-', 'border-').replace('[', '').replace(']', '')}/20 ${yearColor}`}>

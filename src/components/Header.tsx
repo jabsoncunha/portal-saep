@@ -42,9 +42,9 @@ export default function Header() {
   const initials = user?.escola
     ? user.escola
         .split(" ")
-        .filter((w) => w.length > 3)
+        .filter((w: string) => w.length > 3)
         .slice(0, 2)
-        .map((w) => w[0])
+        .map((w: string) => w[0])
         .join("")
         .toUpperCase()
     : "EU";

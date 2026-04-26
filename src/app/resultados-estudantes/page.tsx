@@ -116,7 +116,7 @@ export default function ResultadosEstudantesPage() {
             <div className="flex flex-wrap items-center gap-4">
               {/* Seletor de Ano */}
               <div className="flex bg-slate-100 p-1 rounded-xl border border-slate-200">
-                {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((ano) => (
+                {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((ano: number) => (
                   <button
                     key={ano}
                     onClick={() => setSelectedAno(ano)}
@@ -319,7 +319,7 @@ export default function ResultadosEstudantesPage() {
                 </h3>
 
                 <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
-                  {Object.entries(selectedEstudante.respostas).map(([questao, resposta]) => (
+                  {Object.entries(selectedEstudante.respostas).map(([questao, resposta]: [string, string | null]) => (
                     <div key={questao} className="p-4 bg-white border border-slate-100 rounded-2xl flex flex-col items-center gap-2 group hover:border-blue-200 hover:shadow-sm transition-all">
                       <span className="text-[10px] font-black text-slate-400 uppercase">{questao}</span>
                       <div className={`w-10 h-10 rounded-xl flex items-center justify-center font-black text-lg ${
