@@ -59,7 +59,7 @@ export default function ResultadosEstudantesPage() {
   const allUnidades = useMemo<string[]>(() => {
     if (!currentAnoData) return [];
     const unidades = new Set(currentAnoData.estudantes.map((e: Estudante) => e.unidade));
-    return ["TODAS", ...Array.from(unidades).sort()];
+    return ["TODAS", ...Array.from(unidades).sort()] as string[];
   }, [currentAnoData]);
 
   const allTurmas = useMemo<string[]>(() => {
@@ -69,7 +69,7 @@ export default function ResultadosEstudantesPage() {
         .filter((e: Estudante) => e.unidade === selectedUnidade)
         .map((e: Estudante) => e.turma)
     );
-    return ["TODAS", ...Array.from(turmas).sort()];
+    return ["TODAS", ...Array.from(turmas).sort()] as string[];
   }, [currentAnoData, selectedUnidade]);
 
   // Resetar turma ao mudar unidade
