@@ -1,0 +1,2487 @@
+{
+  "sistema": "SAEP - Sistema de Avaliação da Educação Pública",
+  "ciclo": "2026",
+  "tipo_avaliacao": "Avaliação Diagnóstica",
+  "total_registros": 282,
+  "anos_escolares": [
+    {
+      "ano": 1,
+      "avaliacao": "Avaliação Diagnóstica 2026",
+      "disciplinas": [
+        "LP",
+        "MA"
+      ],
+      "unidades": [
+        {
+          "unidade": "CMEI CANTINHO DA ALEGRIA",
+          "LP": 8.7273,
+          "MA": 8.9899,
+          "MEDIA": 8.8586
+        },
+        {
+          "unidade": "CMEI CARROSSEL",
+          "LP": 9.7126,
+          "MA": 9.6552,
+          "MEDIA": 9.6839
+        },
+        {
+          "unidade": "CMEI CONTOS DE FADA",
+          "LP": 8.519,
+          "MA": 8.6709,
+          "MEDIA": 8.5949
+        },
+        {
+          "unidade": "CMEI FONTES DO SABER",
+          "LP": 8.5619,
+          "MA": 8.7714,
+          "MEDIA": 8.6667
+        },
+        {
+          "unidade": "CMEI IR MARIA CUSTODIA",
+          "LP": 8.5625,
+          "MA": 8.9167,
+          "MEDIA": 8.7396
+        },
+        {
+          "unidade": "CMEI MIUDINHOS",
+          "LP": 7.4421,
+          "MA": 7.4,
+          "MEDIA": 7.4211
+        },
+        {
+          "unidade": "CMEI PRINCIPES E PRINCESAS",
+          "LP": 8.9084,
+          "MA": 8.6183,
+          "MEDIA": 8.7634
+        },
+        {
+          "unidade": "CMEI RECANTO INFANTIL",
+          "LP": 7.9474,
+          "MA": 8.0263,
+          "MEDIA": 7.9868
+        },
+        {
+          "unidade": "CMEI SONHO DE CRIANCA",
+          "LP": 7.3696,
+          "MA": 7.6522,
+          "MEDIA": 7.5109
+        },
+        {
+          "unidade": "CMEI SONHO ENCANTADO",
+          "LP": 8.6795,
+          "MA": 8.6538,
+          "MEDIA": 8.6667
+        },
+        {
+          "unidade": "EM ANTONIO GONCALVES",
+          "LP": 7.6667,
+          "MA": 8.2083,
+          "MEDIA": 7.9375
+        },
+        {
+          "unidade": "EM AURELIO BUARQUE",
+          "LP": 6.2319,
+          "MA": 6.4783,
+          "MEDIA": 6.3551
+        },
+        {
+          "unidade": "EM BENEDITA GALVAO",
+          "LP": 9.49,
+          "MA": 9.24,
+          "MEDIA": 9.365
+        },
+        {
+          "unidade": "EM CARLOS DRUMMOND",
+          "LP": 9.0893,
+          "MA": 8.9821,
+          "MEDIA": 9.0357
+        },
+        {
+          "unidade": "EM CRISPIM ALENCAR",
+          "LP": 5.5686,
+          "MA": 5.1765,
+          "MEDIA": 5.3725
+        },
+        {
+          "unidade": "EM DEGRAUS DO SABER",
+          "LP": 7.5524,
+          "MA": 8.021,
+          "MEDIA": 7.7867
+        },
+        {
+          "unidade": "EM ESTEVAO CASTRO",
+          "LP": 4.6562,
+          "MA": 4.3542,
+          "MEDIA": 4.5052
+        },
+        {
+          "unidade": "EM FRANCISCA BRANDAO",
+          "LP": 8.8065,
+          "MA": 8.6935,
+          "MEDIA": 8.75
+        },
+        {
+          "unidade": "EM HENRIQUE TALONE",
+          "LP": 8.0465,
+          "MA": 7.6512,
+          "MEDIA": 7.8488
+        },
+        {
+          "unidade": "EM LUCIA SALES",
+          "LP": 7.3021,
+          "MA": 7.0312,
+          "MEDIA": 7.1667
+        },
+        {
+          "unidade": "EM MARIA ROSA",
+          "LP": 7.0323,
+          "MA": 7.5806,
+          "MEDIA": 7.3065
+        },
+        {
+          "unidade": "EM MARIA VERONICA",
+          "LP": 8.1789,
+          "MA": 8.2105,
+          "MEDIA": 8.1947
+        },
+        {
+          "unidade": "EM MONTEIRO LOBATO",
+          "LP": 8.619,
+          "MA": 7.9048,
+          "MEDIA": 8.2619
+        },
+        {
+          "unidade": "EM PAULO FREIRE",
+          "LP": 7.9123,
+          "MA": 7.9123,
+          "MEDIA": 7.9123
+        },
+        {
+          "unidade": "EM PR PAULO LEIVAS",
+          "LP": 8.3762,
+          "MA": 8.1782,
+          "MEDIA": 8.2772
+        },
+        {
+          "unidade": "EM PROFA ROSEMIR",
+          "LP": 7.8432,
+          "MA": 7.3838,
+          "MEDIA": 7.6135
+        },
+        {
+          "unidade": "EM PROFA SAVIA",
+          "LP": 7.0976,
+          "MA": 8.122,
+          "MEDIA": 7.6098
+        },
+        {
+          "unidade": "EM THIAGO BARBOSA",
+          "LP": 6.0,
+          "MA": 6.55,
+          "MEDIA": 6.275
+        },
+        {
+          "unidade": "ETI ALMIRANTE TAMANDARE",
+          "LP": 6.8544,
+          "MA": 7.2816,
+          "MEDIA": 7.068
+        },
+        {
+          "unidade": "ETI ANISIO TEIXEIRA",
+          "LP": 7.9516,
+          "MA": 7.9516,
+          "MEDIA": 7.9516
+        },
+        {
+          "unidade": "ETI APRIGIO DE MATOS",
+          "LP": 6.6667,
+          "MA": 6.5,
+          "MEDIA": 6.5833
+        },
+        {
+          "unidade": "ETI CAROLINE CAMPELO",
+          "LP": 8.6528,
+          "MA": 8.2361,
+          "MEDIA": 8.4444
+        },
+        {
+          "unidade": "ETI CORA CORALINA",
+          "LP": 6.5893,
+          "MA": 7.2143,
+          "MEDIA": 6.9018
+        },
+        {
+          "unidade": "ETI DANIEL BATISTA",
+          "LP": 8.0405,
+          "MA": 8.0541,
+          "MEDIA": 8.0473
+        },
+        {
+          "unidade": "ETI EURIDICE DE MELLO",
+          "LP": 6.0641,
+          "MA": 6.6154,
+          "MEDIA": 6.3397
+        },
+        {
+          "unidade": "ETI JOAO BELTRAO",
+          "LP": 7.3571,
+          "MA": 7.8214,
+          "MEDIA": 7.5893
+        },
+        {
+          "unidade": "ETI LUIZ NUNES",
+          "LP": 5.9167,
+          "MA": 7.4167,
+          "MEDIA": 6.6667
+        },
+        {
+          "unidade": "ETI MARCOS FREIRE",
+          "LP": 5.0,
+          "MA": 4.9444,
+          "MEDIA": 4.9722
+        },
+        {
+          "unidade": "ETI MONSENHOR PIAGEM",
+          "LP": 8.7297,
+          "MA": 8.3514,
+          "MEDIA": 8.5405
+        },
+        {
+          "unidade": "ETI PE JOSIMO TAVARES",
+          "LP": 7.5765,
+          "MA": 7.8353,
+          "MEDIA": 7.7059
+        },
+        {
+          "unidade": "ETI PROFA SUELI RECHE",
+          "LP": 7.4,
+          "MA": 8.0667,
+          "MEDIA": 7.7333
+        }
+      ],
+      "media_geral_sem_pcd": {
+        "unidade": "MÉDIA GERAL DA REDE (SEM PCD)",
+        "LP": 7.7962,
+        "MA": 7.8401,
+        "MEDIA": 7.8182
+      },
+      "media_geral_com_pcd": {
+        "unidade": "MÉDIA GERAL DA REDE (COM PCD)",
+        "LP": 7.5469,
+        "MA": 7.5814,
+        "MEDIA": 7.5641
+      }
+    },
+    {
+      "ano": 2,
+      "avaliacao": "Avaliação Diagnóstica 2026",
+      "disciplinas": [
+        "LP",
+        "MA"
+      ],
+      "unidades": [
+        {
+          "unidade": "CMEI CARROSSEL",
+          "LP": 9.3804,
+          "MA": 9.3478,
+          "MEDIA": 9.3641
+        },
+        {
+          "unidade": "CMEI MIUDINHOS",
+          "LP": 8.3148,
+          "MA": 8.6019,
+          "MEDIA": 8.4583
+        },
+        {
+          "unidade": "CMEI PRINCIPES E PRINCESAS",
+          "LP": 8.7177,
+          "MA": 8.8306,
+          "MEDIA": 8.7742
+        },
+        {
+          "unidade": "EM ANTONIO GONCALVES",
+          "LP": 6.6154,
+          "MA": 7.4615,
+          "MEDIA": 7.0385
+        },
+        {
+          "unidade": "EM AURELIO BUARQUE",
+          "LP": 8.1667,
+          "MA": 8.9872,
+          "MEDIA": 8.5769
+        },
+        {
+          "unidade": "EM BENEDITA GALVAO",
+          "LP": 9.114,
+          "MA": 9.3421,
+          "MEDIA": 9.2281
+        },
+        {
+          "unidade": "EM CARLOS DRUMMOND",
+          "LP": 9.0417,
+          "MA": 9.2292,
+          "MEDIA": 9.1354
+        },
+        {
+          "unidade": "EM CRISPIM ALENCAR",
+          "LP": 7.3846,
+          "MA": 7.7385,
+          "MEDIA": 7.5615
+        },
+        {
+          "unidade": "EM DEGRAUS DO SABER",
+          "LP": 8.617,
+          "MA": 8.7234,
+          "MEDIA": 8.6702
+        },
+        {
+          "unidade": "EM ESTEVAO CASTRO",
+          "LP": 8.1275,
+          "MA": 8.3039,
+          "MEDIA": 8.2157
+        },
+        {
+          "unidade": "EM FRANCISCA BRANDAO",
+          "LP": 8.5106,
+          "MA": 8.6489,
+          "MEDIA": 8.5798
+        },
+        {
+          "unidade": "EM HENRIQUE TALONE",
+          "LP": 8.8919,
+          "MA": 8.5405,
+          "MEDIA": 8.7162
+        },
+        {
+          "unidade": "EM LUCIA SALES",
+          "LP": 7.8017,
+          "MA": 8.1379,
+          "MEDIA": 7.9698
+        },
+        {
+          "unidade": "EM MARIA ROSA",
+          "LP": 7.1279,
+          "MA": 7.9884,
+          "MEDIA": 7.5581
+        },
+        {
+          "unidade": "EM MARIA VERONICA",
+          "LP": 8.5094,
+          "MA": 8.7736,
+          "MEDIA": 8.6415
+        },
+        {
+          "unidade": "EM MONTEIRO LOBATO",
+          "LP": 8.5914,
+          "MA": 8.5591,
+          "MEDIA": 8.5753
+        },
+        {
+          "unidade": "EM PAULO FREIRE",
+          "LP": 8.6627,
+          "MA": 8.8675,
+          "MEDIA": 8.7651
+        },
+        {
+          "unidade": "EM PR PAULO LEIVAS",
+          "LP": 9.2,
+          "MA": 9.3273,
+          "MEDIA": 9.2636
+        },
+        {
+          "unidade": "EM PROFA ROSEMIR",
+          "LP": 7.7977,
+          "MA": 8.2197,
+          "MEDIA": 8.0087
+        },
+        {
+          "unidade": "EM PROFA SAVIA",
+          "LP": 7.3922,
+          "MA": 7.8235,
+          "MEDIA": 7.6078
+        },
+        {
+          "unidade": "EM THIAGO BARBOSA",
+          "LP": 7.5976,
+          "MA": 8.2805,
+          "MEDIA": 7.939
+        },
+        {
+          "unidade": "ETI ALMIRANTE TAMANDARE",
+          "LP": 7.8636,
+          "MA": 8.5227,
+          "MEDIA": 8.1932
+        },
+        {
+          "unidade": "ETI ANISIO TEIXEIRA",
+          "LP": 8.5618,
+          "MA": 8.573,
+          "MEDIA": 8.5674
+        },
+        {
+          "unidade": "ETI APRIGIO DE MATOS",
+          "LP": 7.3636,
+          "MA": 9.0909,
+          "MEDIA": 8.2273
+        },
+        {
+          "unidade": "ETI CAROLINE CAMPELO",
+          "LP": 8.5287,
+          "MA": 8.908,
+          "MEDIA": 8.7184
+        },
+        {
+          "unidade": "ETI CORA CORALINA",
+          "LP": 7.8455,
+          "MA": 8.4273,
+          "MEDIA": 8.1364
+        },
+        {
+          "unidade": "ETI DANIEL BATISTA",
+          "LP": 7.3056,
+          "MA": 8.1528,
+          "MEDIA": 7.7292
+        },
+        {
+          "unidade": "ETI EURIDICE DE MELLO",
+          "LP": 7.6827,
+          "MA": 7.8654,
+          "MEDIA": 7.774
+        },
+        {
+          "unidade": "ETI JOAO BELTRAO",
+          "LP": 8.6078,
+          "MA": 8.7843,
+          "MEDIA": 8.6961
+        },
+        {
+          "unidade": "ETI LUIZ NUNES",
+          "LP": 7.5909,
+          "MA": 7.9091,
+          "MEDIA": 7.75
+        },
+        {
+          "unidade": "ETI MARCOS FREIRE",
+          "LP": 6.8571,
+          "MA": 6.4286,
+          "MEDIA": 6.6429
+        },
+        {
+          "unidade": "ETI MONSENHOR PIAGEM",
+          "LP": 9.6522,
+          "MA": 9.8261,
+          "MEDIA": 9.7391
+        },
+        {
+          "unidade": "ETI OLGA BENARIO",
+          "LP": 8.0562,
+          "MA": 8.2697,
+          "MEDIA": 8.1629
+        },
+        {
+          "unidade": "ETI PE JOSIMO TAVARES",
+          "LP": 7.8476,
+          "MA": 8.1714,
+          "MEDIA": 8.0095
+        },
+        {
+          "unidade": "ETI PROFA SUELI RECHE",
+          "LP": 6.1667,
+          "MA": 7.4167,
+          "MEDIA": 6.7917
+        },
+        {
+          "unidade": "ETI SANTA BARBARA",
+          "LP": 7.7917,
+          "MA": 7.7396,
+          "MEDIA": 7.7656
+        }
+      ],
+      "media_geral_sem_pcd": {
+        "unidade": "MÉDIA GERAL DA REDE (SEM PCD)",
+        "LP": 8.2073,
+        "MA": 8.5059,
+        "MEDIA": 8.3566
+      },
+      "media_geral_com_pcd": {
+        "unidade": "MÉDIA GERAL DA REDE (COM PCD)",
+        "LP": 7.9494,
+        "MA": 8.243,
+        "MEDIA": 8.0962
+      }
+    },
+    {
+      "ano": 3,
+      "avaliacao": "Avaliação Diagnóstica 2026",
+      "disciplinas": [
+        "LG",
+        "MA",
+        "CN",
+        "CH"
+      ],
+      "unidades": [
+        {
+          "unidade": "EM BENEDITA GALVAO",
+          "LG": 9.13,
+          "MA": 8.51,
+          "CN": 7.12,
+          "CH": 8.66,
+          "MEDIA": 8.64
+        },
+        {
+          "unidade": "EM PR PAULO LEIVAS",
+          "LG": 8.93,
+          "MA": 8.09,
+          "CN": 6.28,
+          "CH": 7.86,
+          "MEDIA": 8.18
+        },
+        {
+          "unidade": "CMEI MIUDINHOS",
+          "LG": 8.64,
+          "MA": 7.99,
+          "CN": 7.37,
+          "CH": 7.81,
+          "MEDIA": 8.14
+        },
+        {
+          "unidade": "ETI MONSENHOR PIAGEM",
+          "LG": 8.6,
+          "MA": 7.88,
+          "CN": 6.16,
+          "CH": 7.48,
+          "MEDIA": 7.9
+        },
+        {
+          "unidade": "EM PAULO FREIRE",
+          "LG": 8.38,
+          "MA": 8.4,
+          "CN": 5.96,
+          "CH": 6.83,
+          "MEDIA": 7.81
+        },
+        {
+          "unidade": "ETI OLGA BENARIO",
+          "LG": 8.49,
+          "MA": 7.66,
+          "CN": 6.13,
+          "CH": 7.06,
+          "MEDIA": 7.7
+        },
+        {
+          "unidade": "EM HENRIQUE TALONE",
+          "LG": 8.48,
+          "MA": 7.55,
+          "CN": 5.97,
+          "CH": 7.2,
+          "MEDIA": 7.68
+        },
+        {
+          "unidade": "CMEI CARROSSEL",
+          "LG": 8.57,
+          "MA": 7.75,
+          "CN": 5.61,
+          "CH": 6.89,
+          "MEDIA": 7.67
+        },
+        {
+          "unidade": "EM ANNE FRANK",
+          "LG": 8.22,
+          "MA": 7.56,
+          "CN": 6.58,
+          "CH": 7.06,
+          "MEDIA": 7.61
+        },
+        {
+          "unidade": "ETI ALMIRANTE TAMANDARE",
+          "LG": 8.64,
+          "MA": 7.29,
+          "CN": 6.13,
+          "CH": 6.83,
+          "MEDIA": 7.61
+        },
+        {
+          "unidade": "ETI PE JOSIMO TAVARES",
+          "LG": 8.48,
+          "MA": 7.39,
+          "CN": 5.73,
+          "CH": 7.19,
+          "MEDIA": 7.6
+        },
+        {
+          "unidade": "ETI PROF FIDENCIO BOGO",
+          "LG": 8.15,
+          "MA": 7.81,
+          "CN": 5.45,
+          "CH": 7.08,
+          "MEDIA": 7.54
+        },
+        {
+          "unidade": "EM MONTEIRO LOBATO",
+          "LG": 8.12,
+          "MA": 7.24,
+          "CN": 6.21,
+          "CH": 7.37,
+          "MEDIA": 7.51
+        },
+        {
+          "unidade": "CMEI PRINCIPES E PRINCESAS",
+          "LG": 7.9,
+          "MA": 7.81,
+          "CN": 4.81,
+          "CH": 7.21,
+          "MEDIA": 7.4
+        },
+        {
+          "unidade": "ETI ANISIO TEIXEIRA",
+          "LG": 8.24,
+          "MA": 7.06,
+          "CN": 5.96,
+          "CH": 6.72,
+          "MEDIA": 7.34
+        },
+        {
+          "unidade": "EM MARIA VERONICA",
+          "LG": 7.81,
+          "MA": 7.42,
+          "CN": 5.63,
+          "CH": 7.04,
+          "MEDIA": 7.3
+        },
+        {
+          "unidade": "EM ANTONIO GONCALVES",
+          "LG": 7.89,
+          "MA": 7.37,
+          "CN": 6.12,
+          "CH": 6.45,
+          "MEDIA": 7.25
+        },
+        {
+          "unidade": "EM PROFA SAVIA",
+          "LG": 7.98,
+          "MA": 7.29,
+          "CN": 5.81,
+          "CH": 6.46,
+          "MEDIA": 7.23
+        },
+        {
+          "unidade": "ETI SANTA BARBARA",
+          "LG": 7.74,
+          "MA": 7.03,
+          "CN": 6.25,
+          "CH": 7.01,
+          "MEDIA": 7.22
+        },
+        {
+          "unidade": "EM LUCIA SALES",
+          "LG": 7.79,
+          "MA": 7.1,
+          "CN": 6.15,
+          "CH": 6.77,
+          "MEDIA": 7.2
+        },
+        {
+          "unidade": "EM MARIA ROSA",
+          "LG": 7.94,
+          "MA": 6.99,
+          "CN": 5.56,
+          "CH": 6.77,
+          "MEDIA": 7.17
+        },
+        {
+          "unidade": "EM PROFA ROSEMIR",
+          "LG": 7.96,
+          "MA": 6.84,
+          "CN": 5.56,
+          "CH": 6.78,
+          "MEDIA": 7.13
+        },
+        {
+          "unidade": "EM AURELIO BUARQUE",
+          "LG": 7.78,
+          "MA": 6.63,
+          "CN": 5.58,
+          "CH": 6.7,
+          "MEDIA": 6.99
+        },
+        {
+          "unidade": "EM THIAGO BARBOSA",
+          "LG": 8.14,
+          "MA": 6.6,
+          "CN": 5.08,
+          "CH": 6.1,
+          "MEDIA": 6.94
+        },
+        {
+          "unidade": "ETI DANIEL BATISTA",
+          "LG": 7.59,
+          "MA": 6.63,
+          "CN": 5.17,
+          "CH": 6.65,
+          "MEDIA": 6.86
+        },
+        {
+          "unidade": "ETI LUIZ NUNES",
+          "LG": 8.19,
+          "MA": 6.36,
+          "CN": 4.03,
+          "CH": 6.39,
+          "MEDIA": 6.84
+        },
+        {
+          "unidade": "EM FRANCISCA BRANDAO",
+          "LG": 7.45,
+          "MA": 6.7,
+          "CN": 5.43,
+          "CH": 5.92,
+          "MEDIA": 6.7
+        },
+        {
+          "unidade": "ETI MARCOS FREIRE",
+          "LG": 7.71,
+          "MA": 6.04,
+          "CN": 4.11,
+          "CH": 6.07,
+          "MEDIA": 6.5
+        },
+        {
+          "unidade": "ETI CORA CORALINA",
+          "LG": 7.29,
+          "MA": 6.04,
+          "CN": 5.24,
+          "CH": 5.46,
+          "MEDIA": 6.33
+        },
+        {
+          "unidade": "ETI EURIDICE DE MELLO",
+          "LG": 7.3,
+          "MA": 6.32,
+          "CN": 4.82,
+          "CH": 5.22,
+          "MEDIA": 6.32
+        },
+        {
+          "unidade": "ETI LUIZ RODRIGUES",
+          "LG": 6.42,
+          "MA": 6.17,
+          "CN": 4.82,
+          "CH": 6.21,
+          "MEDIA": 6.14
+        },
+        {
+          "unidade": "ETI PROFA SUELI RECHE",
+          "LG": 6.79,
+          "MA": 5.11,
+          "CN": 4.84,
+          "CH": 5.7,
+          "MEDIA": 5.87
+        },
+        {
+          "unidade": "ETI CAROLINE CAMPELO",
+          "LG": 5.95,
+          "MA": 4.84,
+          "CN": 3.58,
+          "CH": 4.64,
+          "MEDIA": 5.1
+        },
+        {
+          "unidade": "EM CRISPIM ALENCAR",
+          "LG": 4.56,
+          "MA": 4.04,
+          "CN": 2.21,
+          "CH": 3.1,
+          "MEDIA": 3.86
+        }
+      ],
+      "media_geral_sem_pcd": {
+        "unidade": "MÉDIA GERAL DA REDE (SEM PCD)",
+        "LG": 8.1151,
+        "MA": 7.2339,
+        "CN": 5.8576,
+        "CH": 6.8365,
+        "MEDIA": 7.3532
+      },
+      "media_geral_com_pcd": {
+        "unidade": "MÉDIA GERAL DA REDE (COM PCD)",
+        "LG": 7.9217,
+        "MA": 7.0669,
+        "CN": 5.7187,
+        "CH": 6.6915,
+        "MEDIA": 7.1834
+      }
+    },
+    {
+      "ano": 4,
+      "avaliacao": "Avaliação Diagnóstica 2026",
+      "disciplinas": [
+        "LG",
+        "MA",
+        "CN",
+        "CH"
+      ],
+      "unidades": [
+        {
+          "unidade": "EM ANNE FRANK",
+          "LG": 5.11,
+          "MA": 6.15,
+          "CN": 4.4,
+          "CH": 5.49,
+          "MEDIA": 5.42
+        },
+        {
+          "unidade": "EM ANTONIO GONCALVES",
+          "LG": 5.1,
+          "MA": 5.76,
+          "CN": 3.92,
+          "CH": 4.56,
+          "MEDIA": 5.05
+        },
+        {
+          "unidade": "EM AURELIO BUARQUE",
+          "LG": 5.51,
+          "MA": 6.44,
+          "CN": 4.28,
+          "CH": 5.02,
+          "MEDIA": 5.55
+        },
+        {
+          "unidade": "EM BEATRIZ RODRIGUES",
+          "LG": 5.27,
+          "MA": 6.06,
+          "CN": 4.19,
+          "CH": 5.23,
+          "MEDIA": 5.37
+        },
+        {
+          "unidade": "EM CRISPIM ALENCAR",
+          "LG": 4.42,
+          "MA": 5.31,
+          "CN": 3.92,
+          "CH": 4.34,
+          "MEDIA": 4.61
+        },
+        {
+          "unidade": "EM ESTEVAO CASTRO",
+          "LG": 4.9,
+          "MA": 6.14,
+          "CN": 3.66,
+          "CH": 4.77,
+          "MEDIA": 5.1
+        },
+        {
+          "unidade": "EM FRANCISCA BRANDAO",
+          "LG": 4.84,
+          "MA": 5.51,
+          "CN": 3.9,
+          "CH": 4.73,
+          "MEDIA": 4.91
+        },
+        {
+          "unidade": "EM HENRIQUE TALONE",
+          "LG": 5.42,
+          "MA": 7.03,
+          "CN": 4.55,
+          "CH": 5.53,
+          "MEDIA": 5.82
+        },
+        {
+          "unidade": "EM LUCIA SALES",
+          "LG": 5.02,
+          "MA": 5.93,
+          "CN": 4.34,
+          "CH": 5.52,
+          "MEDIA": 5.32
+        },
+        {
+          "unidade": "EM MARIA ROSA",
+          "LG": 4.78,
+          "MA": 5.83,
+          "CN": 3.67,
+          "CH": 4.82,
+          "MEDIA": 4.98
+        },
+        {
+          "unidade": "EM MARIA VERONICA",
+          "LG": 4.84,
+          "MA": 5.94,
+          "CN": 3.76,
+          "CH": 4.25,
+          "MEDIA": 4.92
+        },
+        {
+          "unidade": "EM MESTRE PACIFICO",
+          "LG": 4.89,
+          "MA": 6.21,
+          "CN": 4.17,
+          "CH": 4.79,
+          "MEDIA": 5.18
+        },
+        {
+          "unidade": "EM MONTEIRO LOBATO",
+          "LG": 5.64,
+          "MA": 6.94,
+          "CN": 4.73,
+          "CH": 5.92,
+          "MEDIA": 5.98
+        },
+        {
+          "unidade": "EM PAULO FREIRE",
+          "LG": 5.04,
+          "MA": 6.06,
+          "CN": 3.67,
+          "CH": 4.89,
+          "MEDIA": 5.16
+        },
+        {
+          "unidade": "EM PR PAULO LEIVAS",
+          "LG": 7.37,
+          "MA": 8.22,
+          "CN": 6.42,
+          "CH": 7.37,
+          "MEDIA": 7.51
+        },
+        {
+          "unidade": "EM PROFA ROSEMIR",
+          "LG": 4.65,
+          "MA": 5.66,
+          "CN": 3.74,
+          "CH": 4.36,
+          "MEDIA": 4.79
+        },
+        {
+          "unidade": "EM PROFA SAVIA",
+          "LG": 4.45,
+          "MA": 5.47,
+          "CN": 3.85,
+          "CH": 4.37,
+          "MEDIA": 4.66
+        },
+        {
+          "unidade": "EM THIAGO BARBOSA",
+          "LG": 5.02,
+          "MA": 6.24,
+          "CN": 4.17,
+          "CH": 4.44,
+          "MEDIA": 5.16
+        },
+        {
+          "unidade": "ETI ALMIRANTE TAMANDARE",
+          "LG": 5.22,
+          "MA": 6.12,
+          "CN": 4.22,
+          "CH": 4.65,
+          "MEDIA": 5.25
+        },
+        {
+          "unidade": "ETI ANISIO TEIXEIRA",
+          "LG": 5.31,
+          "MA": 6.51,
+          "CN": 3.66,
+          "CH": 4.86,
+          "MEDIA": 5.39
+        },
+        {
+          "unidade": "ETI APRIGIO DE MATOS",
+          "LG": 5.08,
+          "MA": 6.29,
+          "CN": 3.65,
+          "CH": 5.63,
+          "MEDIA": 5.39
+        },
+        {
+          "unidade": "ETI CAROLINE CAMPELO",
+          "LG": 5.34,
+          "MA": 6.28,
+          "CN": 5.31,
+          "CH": 5.75,
+          "MEDIA": 5.7
+        },
+        {
+          "unidade": "ETI CORA CORALINA",
+          "LG": 5.54,
+          "MA": 6.16,
+          "CN": 4.28,
+          "CH": 5.7,
+          "MEDIA": 5.62
+        },
+        {
+          "unidade": "ETI DANIEL BATISTA",
+          "LG": 5.54,
+          "MA": 6.47,
+          "CN": 4.09,
+          "CH": 5.28,
+          "MEDIA": 5.6
+        },
+        {
+          "unidade": "ETI LUIZ GONZAGA",
+          "LG": 5.5,
+          "MA": 6.14,
+          "CN": 4.38,
+          "CH": 5.31,
+          "MEDIA": 5.53
+        },
+        {
+          "unidade": "ETI LUIZ NUNES",
+          "LG": 4.96,
+          "MA": 7.35,
+          "CN": 3.59,
+          "CH": 5.54,
+          "MEDIA": 5.63
+        },
+        {
+          "unidade": "ETI LUIZ RODRIGUES",
+          "LG": 5.23,
+          "MA": 6.27,
+          "CN": 3.98,
+          "CH": 5.1,
+          "MEDIA": 5.37
+        },
+        {
+          "unidade": "ETI MARCOS FREIRE",
+          "LG": 2.89,
+          "MA": 3.79,
+          "CN": 2.5,
+          "CH": 2.99,
+          "MEDIA": 3.13
+        },
+        {
+          "unidade": "ETI MONSENHOR PIAGEM",
+          "LG": 5.33,
+          "MA": 6.45,
+          "CN": 3.71,
+          "CH": 4.81,
+          "MEDIA": 5.37
+        },
+        {
+          "unidade": "ETI PE JOSIMO TAVARES",
+          "LG": 5.14,
+          "MA": 5.9,
+          "CN": 4.05,
+          "CH": 4.88,
+          "MEDIA": 5.19
+        },
+        {
+          "unidade": "ETI PROF FIDENCIO BOGO",
+          "LG": 5.46,
+          "MA": 6.86,
+          "CN": 4.4,
+          "CH": 5.46,
+          "MEDIA": 5.76
+        },
+        {
+          "unidade": "ETI PROFA SUELI RECHE",
+          "LG": 4.97,
+          "MA": 6.08,
+          "CN": 3.65,
+          "CH": 5.1,
+          "MEDIA": 5.18
+        },
+        {
+          "unidade": "ETI SANTA BARBARA",
+          "LG": 4.11,
+          "MA": 5.15,
+          "CN": 3.65,
+          "CH": 4.06,
+          "MEDIA": 4.35
+        },
+        {
+          "unidade": "ETI VINICIUS DE MORAES",
+          "LG": 5.96,
+          "MA": 7.64,
+          "CN": 5.08,
+          "CH": 6.08,
+          "MEDIA": 6.38
+        }
+      ],
+      "media_geral_sem_pcd": {
+        "unidade": "MÉDIA GERAL DA REDE (SEM PCD)",
+        "LG": 5.2667,
+        "MA": 6.215,
+        "CN": 4.181,
+        "CH": 5.1256,
+        "MEDIA": 5.3611
+      },
+      "media_geral_com_pcd": {
+        "unidade": "MÉDIA GERAL DA REDE (COM PCD)",
+        "LG": 5.1751,
+        "MA": 6.215,
+        "CN": 4.181,
+        "CH": 5.1256,
+        "MEDIA": 5.3611
+      }
+    },
+    {
+      "ano": 5,
+      "avaliacao": "Avaliação Diagnóstica 2026",
+      "disciplinas": [
+        "LG",
+        "MA",
+        "CN",
+        "CH"
+      ],
+      "unidades": [
+        {
+          "unidade": "ETI OLGA BENARIO",
+          "LG": 7.21,
+          "MA": 5.52,
+          "CN": 5.02,
+          "CH": 6.08,
+          "MEDIA": 6.24,
+          "IDU": 45
+        },
+        {
+          "unidade": "ETI MONSENHOR PIAGEM",
+          "LG": 6.69,
+          "MA": 5.19,
+          "CN": 4.75,
+          "CH": 6.21,
+          "MEDIA": 5.95,
+          "IDU": 42
+        },
+        {
+          "unidade": "ETI DANIEL BATISTA",
+          "LG": 6.74,
+          "MA": 5.27,
+          "CN": 4.48,
+          "CH": 6.13,
+          "MEDIA": 5.94,
+          "IDU": 26
+        },
+        {
+          "unidade": "ETI PE JOSIMO TAVARES",
+          "LG": 6.94,
+          "MA": 4.98,
+          "CN": 4.42,
+          "CH": 5.88,
+          "MEDIA": 5.87,
+          "IDU": 53
+        },
+        {
+          "unidade": "EM MONTEIRO LOBATO",
+          "LG": 6.84,
+          "MA": 5.05,
+          "CN": 4.5,
+          "CH": 5.73,
+          "MEDIA": 5.83,
+          "IDU": 43
+        },
+        {
+          "unidade": "ETI ALMIRANTE TAMANDARE",
+          "LG": 6.68,
+          "MA": 4.78,
+          "CN": 4.02,
+          "CH": 5.53,
+          "MEDIA": 5.59,
+          "IDU": 85
+        },
+        {
+          "unidade": "EM THIAGO BARBOSA",
+          "LG": 6.55,
+          "MA": 4.95,
+          "CN": 4.03,
+          "CH": 5.46,
+          "MEDIA": 5.57,
+          "IDU": 51
+        },
+        {
+          "unidade": "ETI LUIZ GONZAGA",
+          "LG": 6.56,
+          "MA": 4.39,
+          "CN": 4.33,
+          "CH": 5.83,
+          "MEDIA": 5.56,
+          "IDU": 44
+        },
+        {
+          "unidade": "ETI ANISIO TEIXEIRA",
+          "LG": 6.63,
+          "MA": 4.91,
+          "CN": 3.73,
+          "CH": 5.19,
+          "MEDIA": 5.49,
+          "IDU": 82
+        },
+        {
+          "unidade": "ETI PROF FIDENCIO BOGO",
+          "LG": 6.39,
+          "MA": 4.62,
+          "CN": 3.68,
+          "CH": 5.81,
+          "MEDIA": 5.46,
+          "IDU": 91
+        },
+        {
+          "unidade": "EM PAULO FREIRE",
+          "LG": 6.34,
+          "MA": 4.68,
+          "CN": 3.94,
+          "CH": 5.47,
+          "MEDIA": 5.41,
+          "IDU": 46
+        },
+        {
+          "unidade": "EM MESTRE PACIFICO",
+          "LG": 6.48,
+          "MA": 4.65,
+          "CN": 3.9,
+          "CH": 5.18,
+          "MEDIA": 5.38,
+          "IDU": 41
+        },
+        {
+          "unidade": "ETI LUIZ RODRIGUES",
+          "LG": 6.23,
+          "MA": 4.69,
+          "CN": 3.52,
+          "CH": 5.71,
+          "MEDIA": 5.38,
+          "IDU": 37
+        },
+        {
+          "unidade": "ETI CORA CORALINA",
+          "LG": 6.48,
+          "MA": 4.68,
+          "CN": 4.36,
+          "CH": 4.83,
+          "MEDIA": 5.36,
+          "IDU": 24
+        },
+        {
+          "unidade": "EM MARIA VERONICA",
+          "LG": 6.13,
+          "MA": 4.46,
+          "CN": 3.84,
+          "CH": 5.2,
+          "MEDIA": 5.2,
+          "IDU": 71
+        },
+        {
+          "unidade": "EM PROFA ROSEMIR",
+          "LG": 6.22,
+          "MA": 4.37,
+          "CN": 3.75,
+          "CH": 5.22,
+          "MEDIA": 5.2,
+          "IDU": 48
+        },
+        {
+          "unidade": "ETI CAROLINE CAMPELO",
+          "LG": 6.11,
+          "MA": 4.64,
+          "CN": 3.08,
+          "CH": 4.88,
+          "MEDIA": 5.07,
+          "IDU": 64
+        },
+        {
+          "unidade": "EM PROFA SAVIA",
+          "LG": 6.08,
+          "MA": 4.3,
+          "CN": 3.1,
+          "CH": 5.12,
+          "MEDIA": 5.03,
+          "IDU": 63
+        },
+        {
+          "unidade": "EM ANTONIO GONCALVES",
+          "LG": 5.92,
+          "MA": 4.22,
+          "CN": 3.9,
+          "CH": 5.02,
+          "MEDIA": 5.02,
+          "IDU": 17
+        },
+        {
+          "unidade": "EM CRISPIM ALENCAR",
+          "LG": 5.53,
+          "MA": 4.66,
+          "CN": 3.25,
+          "CH": 5.29,
+          "MEDIA": 4.98,
+          "IDU": 25
+        },
+        {
+          "unidade": "EM AURELIO BUARQUE",
+          "LG": 5.79,
+          "MA": 4.15,
+          "CN": 3.97,
+          "CH": 4.97,
+          "MEDIA": 4.95,
+          "IDU": 18
+        },
+        {
+          "unidade": "EM FRANCISCA BRANDAO",
+          "LG": 5.81,
+          "MA": 4.26,
+          "CN": 3.73,
+          "CH": 4.78,
+          "MEDIA": 4.91,
+          "IDU": 31
+        },
+        {
+          "unidade": "ETI MARCOS FREIRE",
+          "LG": 5.56,
+          "MA": 4.02,
+          "CN": 3.47,
+          "CH": 5.42,
+          "MEDIA": 4.87,
+          "IDU": 38
+        },
+        {
+          "unidade": "EM ESTEVAO CASTRO",
+          "LG": 5.81,
+          "MA": 4.12,
+          "CN": 3.35,
+          "CH": 4.74,
+          "MEDIA": 4.82,
+          "IDU": 30
+        },
+        {
+          "unidade": "ETI EURIDICE DE MELLO",
+          "LG": 5.88,
+          "MA": 4.2,
+          "CN": 2.95,
+          "CH": 4.56,
+          "MEDIA": 4.78,
+          "IDU": 52
+        },
+        {
+          "unidade": "ETI SANTA BARBARA",
+          "LG": 5.78,
+          "MA": 3.94,
+          "CN": 3.37,
+          "CH": 4.79,
+          "MEDIA": 4.78,
+          "IDU": 49
+        },
+        {
+          "unidade": "EM MARIA ROSA",
+          "LG": 5.63,
+          "MA": 4.06,
+          "CN": 3.38,
+          "CH": 4.75,
+          "MEDIA": 4.74,
+          "IDU": 40
+        },
+        {
+          "unidade": "ETI APRIGIO DE MATOS",
+          "LG": 6.08,
+          "MA": 3.56,
+          "CN": 2.96,
+          "CH": 4.8,
+          "MEDIA": 4.74,
+          "IDU": 20
+        },
+        {
+          "unidade": "ETI LUIZ NUNES",
+          "LG": 5.3,
+          "MA": 3.88,
+          "CN": 2.95,
+          "CH": 4.68,
+          "MEDIA": 4.5,
+          "IDU": 36
+        },
+        {
+          "unidade": "EM JORGE AMADO",
+          "LG": 5.2,
+          "MA": 3.78,
+          "CN": 3.47,
+          "CH": 4.05,
+          "MEDIA": 4.35,
+          "IDU": 33
+        },
+        {
+          "unidade": "ETI PROFA SUELI RECHE",
+          "LG": 5.24,
+          "MA": 3.6,
+          "CN": 3.08,
+          "CH": 4.35,
+          "MEDIA": 4.34,
+          "IDU": 50
+        },
+        {
+          "unidade": "ETI PROFA MARGARIDA",
+          "LG": 4.95,
+          "MA": 3.56,
+          "CN": 3.45,
+          "CH": 4.17,
+          "MEDIA": 4.22,
+          "IDU": 81
+        }
+      ],
+      "media_geral_sem_pcd": {
+        "unidade": "MÉDIA GERAL DA REDE(SEM PCD)",
+        "LG": 6.3939,
+        "MA": 4.7148,
+        "CN": 3.9948,
+        "CH": 5.3652,
+        "MEDIA": 5.4236
+      },
+      "media_geral_com_pcd": {
+        "unidade": "MÉDIA GERAL DA REDE (COM PCD)",
+        "LG": 6.2786,
+        "MA": 4.6487,
+        "CN": 3.9434,
+        "CH": 5.3058,
+        "MEDIA": 5.3421
+      }
+    },
+    {
+      "ano": 6,
+      "avaliacao": "Avaliação Diagnóstica 2026",
+      "disciplinas": [
+        "LG",
+        "MA",
+        "CN",
+        "CH"
+      ],
+      "unidades": [
+        {
+          "unidade": "EM ANNE FRANK",
+          "LG": 7.91,
+          "MA": 5.9,
+          "CN": 6.9,
+          "CH": 7.46,
+          "MEDIA": 7.15,
+          "IDU": 19
+        },
+        {
+          "unidade": "EM HENRIQUE TALONE",
+          "LG": 7.77,
+          "MA": 5.19,
+          "CN": 6.48,
+          "CH": 7.28,
+          "MEDIA": 6.82,
+          "IDU": 32
+        },
+        {
+          "unidade": "ETI VINICIUS DE MORAES",
+          "LG": 7.51,
+          "MA": 5.57,
+          "CN": 6.34,
+          "CH": 6.76,
+          "MEDIA": 6.68,
+          "IDU": 54
+        },
+        {
+          "unidade": "ETI PE JOSIMO TAVARES",
+          "LG": 7.53,
+          "MA": 5.18,
+          "CN": 6.11,
+          "CH": 7.01,
+          "MEDIA": 6.62,
+          "IDU": 53
+        },
+        {
+          "unidade": "EM DARCY RIBEIRO",
+          "LG": 7.51,
+          "MA": 5.25,
+          "CN": 6.18,
+          "CH": 6.63,
+          "MEDIA": 6.55,
+          "IDU": 27
+        },
+        {
+          "unidade": "ETI ALMIRANTE TAMANDARE",
+          "LG": 7.12,
+          "MA": 5.13,
+          "CN": 5.89,
+          "CH": 6.66,
+          "MEDIA": 6.34,
+          "IDU": 85
+        },
+        {
+          "unidade": "EM BEATRIZ RODRIGUES",
+          "LG": 6.9,
+          "MA": 5.02,
+          "CN": 6.24,
+          "CH": 6.61,
+          "MEDIA": 6.26,
+          "IDU": 21
+        },
+        {
+          "unidade": "ETI MONSENHOR PIAGEM",
+          "LG": 7.06,
+          "MA": 4.58,
+          "CN": 5.93,
+          "CH": 6.52,
+          "MEDIA": 6.15,
+          "IDU": 42
+        },
+        {
+          "unidade": "EM AURELIO BUARQUE",
+          "LG": 6.97,
+          "MA": 4.51,
+          "CN": 5.13,
+          "CH": 6.47,
+          "MEDIA": 5.99,
+          "IDU": 18
+        },
+        {
+          "unidade": "ETI PROF FIDENCIO BOGO",
+          "LG": 6.99,
+          "MA": 4.59,
+          "CN": 5.14,
+          "CH": 5.93,
+          "MEDIA": 5.89,
+          "IDU": 91
+        },
+        {
+          "unidade": "ETI ANISIO TEIXEIRA",
+          "LG": 6.92,
+          "MA": 4.36,
+          "CN": 5.44,
+          "CH": 5.91,
+          "MEDIA": 5.83,
+          "IDU": 82
+        },
+        {
+          "unidade": "EM THIAGO BARBOSA",
+          "LG": 6.88,
+          "MA": 4.51,
+          "CN": 5.22,
+          "CH": 5.85,
+          "MEDIA": 5.82,
+          "IDU": 51
+        },
+        {
+          "unidade": "ETI EURIDICE DE MELLO",
+          "LG": 6.92,
+          "MA": 4.52,
+          "CN": 5.3,
+          "CH": 5.73,
+          "MEDIA": 5.82,
+          "IDU": 52
+        },
+        {
+          "unidade": "EM ANTONIO GONCALVES",
+          "LG": 6.81,
+          "MA": 4.59,
+          "CN": 4.98,
+          "CH": 5.91,
+          "MEDIA": 5.79,
+          "IDU": 17
+        },
+        {
+          "unidade": "EM MARIA JULIA",
+          "LG": 6.74,
+          "MA": 4.48,
+          "CN": 5.27,
+          "CH": 5.91,
+          "MEDIA": 5.78,
+          "IDU": 39
+        },
+        {
+          "unidade": "EM JORGE AMADO",
+          "LG": 6.68,
+          "MA": 4.54,
+          "CN": 5.22,
+          "CH": 5.88,
+          "MEDIA": 5.76,
+          "IDU": 33
+        },
+        {
+          "unidade": "EM MARIA ROSA",
+          "LG": 6.54,
+          "MA": 4.86,
+          "CN": 5.02,
+          "CH": 5.65,
+          "MEDIA": 5.71,
+          "IDU": 40
+        },
+        {
+          "unidade": "ETI CAROLINE CAMPELO",
+          "LG": 6.41,
+          "MA": 4.42,
+          "CN": 4.77,
+          "CH": 5.89,
+          "MEDIA": 5.57,
+          "IDU": 64
+        },
+        {
+          "unidade": "ETI LUIZ GONZAGA",
+          "LG": 6.37,
+          "MA": 4.28,
+          "CN": 5.47,
+          "CH": 5.78,
+          "MEDIA": 5.57,
+          "IDU": 44
+        },
+        {
+          "unidade": "EM CRISPIM ALENCAR",
+          "LG": 6.5,
+          "MA": 4.44,
+          "CN": 4.97,
+          "CH": 5.57,
+          "MEDIA": 5.55,
+          "IDU": 25
+        },
+        {
+          "unidade": "EM ANTONIO CARLOS JOBIM",
+          "LG": 6.35,
+          "MA": 4.13,
+          "CN": 5.39,
+          "CH": 5.59,
+          "MEDIA": 5.47,
+          "IDU": 16
+        },
+        {
+          "unidade": "EM PROFA SAVIA",
+          "LG": 6.34,
+          "MA": 4.37,
+          "CN": 4.79,
+          "CH": 5.51,
+          "MEDIA": 5.44,
+          "IDU": 63
+        },
+        {
+          "unidade": "EM MESTRE PACIFICO",
+          "LG": 5.97,
+          "MA": 4.32,
+          "CN": 4.56,
+          "CH": 5.17,
+          "MEDIA": 5.18,
+          "IDU": 41
+        },
+        {
+          "unidade": "ETI APRIGIO DE MATOS",
+          "LG": 6.44,
+          "MA": 3.71,
+          "CN": 3.46,
+          "CH": 5.42,
+          "MEDIA": 5.13,
+          "IDU": 20
+        },
+        {
+          "unidade": "ETI MARCOS FREIRE",
+          "LG": 5.89,
+          "MA": 4.09,
+          "CN": 4.23,
+          "CH": 5.42,
+          "MEDIA": 5.11,
+          "IDU": 38
+        },
+        {
+          "unidade": "ETI PROFA MARGARIDA",
+          "LG": 5.97,
+          "MA": 4.08,
+          "CN": 4.79,
+          "CH": 5.03,
+          "MEDIA": 5.11,
+          "IDU": 81
+        },
+        {
+          "unidade": "ETI PROFA SUELI RECHE",
+          "LG": 4.81,
+          "MA": 3.85,
+          "CN": 5.08,
+          "CH": 4.38,
+          "MEDIA": 4.49,
+          "IDU": 50
+        }
+      ],
+      "media_geral_sem_pcd": {
+        "unidade": "MÉDIA GERAL DA REDE(SEM PCD)",
+        "LG": 6.8173,
+        "MA": 4.6825,
+        "CN": 5.4449,
+        "CH": 6.0705,
+        "MEDIA": 5.917
+      },
+      "media_geral_com_pcd": {
+        "unidade": "MÉDIA GERAL DA REDE (COM PCD)",
+        "LG": 6.7889,
+        "MA": 4.6613,
+        "CN": 5.4256,
+        "CH": 6.0493,
+        "MEDIA": 5.8933
+      }
+    },
+    {
+      "ano": 7,
+      "avaliacao": "Avaliação Diagnóstica 2026",
+      "disciplinas": [
+        "LG",
+        "MA",
+        "CN",
+        "CH"
+      ],
+      "unidades": [
+        {
+          "unidade": "EM HENRIQUE TALONE",
+          "LG": 6.66,
+          "MA": 3.16,
+          "CN": 4.39,
+          "CH": 6.21,
+          "MEDIA": 5.37,
+          "IDU": 32
+        },
+        {
+          "unidade": "EM ANNE FRANK",
+          "LG": 6.62,
+          "MA": 3.19,
+          "CN": 3.94,
+          "CH": 6.17,
+          "MEDIA": 5.29,
+          "IDU": 19
+        },
+        {
+          "unidade": "ETI VINICIUS DE MORAES",
+          "LG": 6.7,
+          "MA": 2.82,
+          "CN": 4.1,
+          "CH": 5.77,
+          "MEDIA": 5.15,
+          "IDU": 54
+        },
+        {
+          "unidade": "EM DARCY RIBEIRO",
+          "LG": 6.37,
+          "MA": 2.99,
+          "CN": 3.55,
+          "CH": 6.07,
+          "MEDIA": 5.08,
+          "IDU": 27
+        },
+        {
+          "unidade": "ETI ALMIRANTE TAMANDARE",
+          "LG": 6.1,
+          "MA": 2.89,
+          "CN": 3.64,
+          "CH": 5.66,
+          "MEDIA": 4.86,
+          "IDU": 85
+        },
+        {
+          "unidade": "ETI PE JOSIMO TAVARES",
+          "LG": 6.23,
+          "MA": 2.7,
+          "CN": 3.95,
+          "CH": 5.49,
+          "MEDIA": 4.86,
+          "IDU": 53
+        },
+        {
+          "unidade": "ETI DANIEL BATISTA",
+          "LG": 6.16,
+          "MA": 2.6,
+          "CN": 3.76,
+          "CH": 5.55,
+          "MEDIA": 4.8,
+          "IDU": 26
+        },
+        {
+          "unidade": "ETI CAROLINE CAMPELO",
+          "LG": 5.97,
+          "MA": 2.72,
+          "CN": 4.4,
+          "CH": 5.3,
+          "MEDIA": 4.77,
+          "IDU": 64
+        },
+        {
+          "unidade": "ETI PROF FIDENCIO BOGO",
+          "LG": 6.12,
+          "MA": 2.85,
+          "CN": 3.45,
+          "CH": 5.18,
+          "MEDIA": 4.72,
+          "IDU": 91
+        },
+        {
+          "unidade": "EM BEATRIZ RODRIGUES",
+          "LG": 6.1,
+          "MA": 2.55,
+          "CN": 3.61,
+          "CH": 5.18,
+          "MEDIA": 4.65,
+          "IDU": 21
+        },
+        {
+          "unidade": "EM THIAGO BARBOSA",
+          "LG": 5.92,
+          "MA": 2.58,
+          "CN": 3.61,
+          "CH": 5.35,
+          "MEDIA": 4.63,
+          "IDU": 51
+        },
+        {
+          "unidade": "EM ANTONIO GONCALVES",
+          "LG": 5.4,
+          "MA": 2.54,
+          "CN": 3.76,
+          "CH": 5.12,
+          "MEDIA": 4.39,
+          "IDU": 17
+        },
+        {
+          "unidade": "EM AURELIO BUARQUE",
+          "LG": 5.75,
+          "MA": 2.43,
+          "CN": 3.74,
+          "CH": 4.62,
+          "MEDIA": 4.37,
+          "IDU": 18
+        },
+        {
+          "unidade": "ETI MONSENHOR PIAGEM",
+          "LG": 5.65,
+          "MA": 2.23,
+          "CN": 3.38,
+          "CH": 5.12,
+          "MEDIA": 4.36,
+          "IDU": 42
+        },
+        {
+          "unidade": "EM CRISPIM ALENCAR",
+          "LG": 5.23,
+          "MA": 2.91,
+          "CN": 3.31,
+          "CH": 4.97,
+          "MEDIA": 4.33,
+          "IDU": 25
+        },
+        {
+          "unidade": "ETI APRIGIO DE MATOS",
+          "LG": 5.21,
+          "MA": 2.65,
+          "CN": 3.58,
+          "CH": 5.13,
+          "MEDIA": 4.33,
+          "IDU": 20
+        },
+        {
+          "unidade": "ETI ANISIO TEIXEIRA",
+          "LG": 5.57,
+          "MA": 2.29,
+          "CN": 3.7,
+          "CH": 4.69,
+          "MEDIA": 4.28,
+          "IDU": 82
+        },
+        {
+          "unidade": "EM PROFA SAVIA",
+          "LG": 5.24,
+          "MA": 2.68,
+          "CN": 3.56,
+          "CH": 4.77,
+          "MEDIA": 4.26,
+          "IDU": 63
+        },
+        {
+          "unidade": "ETI LUIZ GONZAGA",
+          "LG": 5.12,
+          "MA": 3.25,
+          "CN": 3.63,
+          "CH": 4.13,
+          "MEDIA": 4.21,
+          "IDU": 44
+        },
+        {
+          "unidade": "EM JORGE AMADO",
+          "LG": 5.35,
+          "MA": 2.27,
+          "CN": 3.44,
+          "CH": 4.21,
+          "MEDIA": 4.05,
+          "IDU": 33
+        },
+        {
+          "unidade": "ETI LUIZ NUNES",
+          "LG": 4.67,
+          "MA": 2.18,
+          "CN": 3.87,
+          "CH": 5.13,
+          "MEDIA": 4.03,
+          "IDU": 36
+        },
+        {
+          "unidade": "EM ANTONIO CARLOS JOBIM",
+          "LG": 5.03,
+          "MA": 2.59,
+          "CN": 3.31,
+          "CH": 4.19,
+          "MEDIA": 3.99,
+          "IDU": 16
+        },
+        {
+          "unidade": "ETI EURIDICE DE MELLO",
+          "LG": 5.17,
+          "MA": 2.17,
+          "CN": 3.47,
+          "CH": 4.24,
+          "MEDIA": 3.96,
+          "IDU": 52
+        },
+        {
+          "unidade": "ETI PROFA MARGARIDA",
+          "LG": 4.96,
+          "MA": 2.4,
+          "CN": 3.11,
+          "CH": 4.32,
+          "MEDIA": 3.92,
+          "IDU": 81
+        },
+        {
+          "unidade": "EM MARIA JULIA",
+          "LG": 4.91,
+          "MA": 2.35,
+          "CN": 3.67,
+          "CH": 4.11,
+          "MEDIA": 3.9,
+          "IDU": 39
+        },
+        {
+          "unidade": "ETI MARCOS FREIRE",
+          "LG": 5.03,
+          "MA": 2.23,
+          "CN": 3.36,
+          "CH": 3.95,
+          "MEDIA": 3.84,
+          "IDU": 38
+        }
+      ],
+      "media_geral_sem_pcd": {
+        "unidade": "MÉDIA GERAL DA REDE(SEM PCD)",
+        "LG": 5.7816,
+        "MA": 2.645,
+        "CN": 3.7192,
+        "CH": 5.0282,
+        "MEDIA": 4.5352
+      },
+      "media_geral_com_pcd": {
+        "unidade": "MÉDIA GERAL DA REDE (COM PCD)",
+        "LG": 5.6675,
+        "MA": 2.6187,
+        "CN": 3.6769,
+        "CH": 4.9666,
+        "MEDIA": 4.4651
+      }
+    },
+    {
+      "ano": 8,
+      "avaliacao": "Avaliação Diagnóstica 2026",
+      "disciplinas": [
+        "LG",
+        "MA",
+        "CN",
+        "CH"
+      ],
+      "unidades": [
+        {
+          "unidade": "ETI MONSENHOR PIAGEM",
+          "LG": 6.54,
+          "MA": 4.24,
+          "CN": 5.03,
+          "CH": 6.02,
+          "MEDIA": 5.63,
+          "IDU": 42
+        },
+        {
+          "unidade": "ETI ALMIRANTE TAMANDARE",
+          "LG": 6.6,
+          "MA": 3.98,
+          "CN": 4.89,
+          "CH": 6.11,
+          "MEDIA": 5.59,
+          "IDU": 85
+        },
+        {
+          "unidade": "ETI VINICIUS DE MORAES",
+          "LG": 6.19,
+          "MA": 3.78,
+          "CN": 5.7,
+          "CH": 5.84,
+          "MEDIA": 5.42,
+          "IDU": 54
+        },
+        {
+          "unidade": "EM BEATRIZ RODRIGUES",
+          "LG": 6.42,
+          "MA": 3.9,
+          "CN": 4.94,
+          "CH": 5.5,
+          "MEDIA": 5.37,
+          "IDU": 21
+        },
+        {
+          "unidade": "EM ANNE FRANK",
+          "LG": 5.89,
+          "MA": 3.94,
+          "CN": 4.82,
+          "CH": 6.25,
+          "MEDIA": 5.34,
+          "IDU": 19
+        },
+        {
+          "unidade": "EM DARCY RIBEIRO",
+          "LG": 6.33,
+          "MA": 3.61,
+          "CN": 5.14,
+          "CH": 5.68,
+          "MEDIA": 5.32,
+          "IDU": 27
+        },
+        {
+          "unidade": "ETI CAROLINE CAMPELO",
+          "LG": 6.26,
+          "MA": 3.63,
+          "CN": 4.92,
+          "CH": 5.38,
+          "MEDIA": 5.2,
+          "IDU": 64
+        },
+        {
+          "unidade": "EM AURELIO BUARQUE",
+          "LG": 6.23,
+          "MA": 3.84,
+          "CN": 4.95,
+          "CH": 5.11,
+          "MEDIA": 5.19,
+          "IDU": 18
+        },
+        {
+          "unidade": "EM HENRIQUE TALONE",
+          "LG": 5.97,
+          "MA": 3.65,
+          "CN": 4.89,
+          "CH": 5.65,
+          "MEDIA": 5.16,
+          "IDU": 32
+        },
+        {
+          "unidade": "ETI PE JOSIMO TAVARES",
+          "LG": 6.07,
+          "MA": 3.23,
+          "CN": 4.82,
+          "CH": 5.2,
+          "MEDIA": 4.97,
+          "IDU": 53
+        },
+        {
+          "unidade": "ETI PROF FIDENCIO BOGO",
+          "LG": 5.95,
+          "MA": 2.93,
+          "CN": 4.63,
+          "CH": 5.2,
+          "MEDIA": 4.82,
+          "IDU": 91
+        },
+        {
+          "unidade": "ETI MARCOS FREIRE",
+          "LG": 6.41,
+          "MA": 3.52,
+          "CN": 3.63,
+          "CH": 4.19,
+          "MEDIA": 4.79,
+          "IDU": 38
+        },
+        {
+          "unidade": "ETI DANIEL BATISTA",
+          "LG": 5.65,
+          "MA": 3.28,
+          "CN": 3.94,
+          "CH": 5.19,
+          "MEDIA": 4.72,
+          "IDU": 26
+        },
+        {
+          "unidade": "ETI LUIZ GONZAGA",
+          "LG": 5.39,
+          "MA": 3.46,
+          "CN": 4.58,
+          "CH": 4.86,
+          "MEDIA": 4.66,
+          "IDU": 44
+        },
+        {
+          "unidade": "ETI ANISIO TEIXEIRA",
+          "LG": 5.89,
+          "MA": 3.14,
+          "CN": 4.16,
+          "CH": 4.34,
+          "MEDIA": 4.6,
+          "IDU": 82
+        },
+        {
+          "unidade": "ETI PROFA MARGARIDA",
+          "LG": 5.65,
+          "MA": 3.6,
+          "CN": 3.83,
+          "CH": 4.4,
+          "MEDIA": 4.6,
+          "IDU": 81
+        },
+        {
+          "unidade": "EM ANTONIO CARLOS JOBIM",
+          "LG": 5.58,
+          "MA": 3.27,
+          "CN": 3.9,
+          "CH": 4.71,
+          "MEDIA": 4.57,
+          "IDU": 16
+        },
+        {
+          "unidade": "EM THIAGO BARBOSA",
+          "LG": 5.6,
+          "MA": 3.11,
+          "CN": 3.71,
+          "CH": 4.92,
+          "MEDIA": 4.56,
+          "IDU": 51
+        },
+        {
+          "unidade": "EM MESTRE PACIFICO",
+          "LG": 5.72,
+          "MA": 3.13,
+          "CN": 3.64,
+          "CH": 4.61,
+          "MEDIA": 4.53,
+          "IDU": 41
+        },
+        {
+          "unidade": "EM CRISPIM ALENCAR",
+          "LG": 5.28,
+          "MA": 3.15,
+          "CN": 4.72,
+          "CH": 4.32,
+          "MEDIA": 4.43,
+          "IDU": 25
+        },
+        {
+          "unidade": "EM JORGE AMADO",
+          "LG": 5.45,
+          "MA": 3.38,
+          "CN": 3.65,
+          "CH": 4.36,
+          "MEDIA": 4.43,
+          "IDU": 33
+        },
+        {
+          "unidade": "EM MARIA ROSA",
+          "LG": 5.44,
+          "MA": 3.01,
+          "CN": 4.13,
+          "CH": 4.4,
+          "MEDIA": 4.4,
+          "IDU": 40
+        },
+        {
+          "unidade": "EM PROFA SAVIA",
+          "LG": 5.07,
+          "MA": 3.12,
+          "CN": 3.74,
+          "CH": 4.27,
+          "MEDIA": 4.21,
+          "IDU": 63
+        },
+        {
+          "unidade": "ETI LUIZ NUNES",
+          "LG": 4.94,
+          "MA": 3.45,
+          "CN": 3.8,
+          "CH": 3.6,
+          "MEDIA": 4.1,
+          "IDU": 36
+        },
+        {
+          "unidade": "ETI PROFA SUELI RECHE",
+          "LG": 4.74,
+          "MA": 3.33,
+          "CN": 3.67,
+          "CH": 3.92,
+          "MEDIA": 4.05,
+          "IDU": 50
+        },
+        {
+          "unidade": "ETI APRIGIO DE MATOS",
+          "LG": 5.08,
+          "MA": 3.14,
+          "CN": 2.75,
+          "CH": 3.75,
+          "MEDIA": 3.98,
+          "IDU": 20
+        },
+        {
+          "unidade": "EM ANTONIO GONCALVES",
+          "LG": 4.74,
+          "MA": 2.92,
+          "CN": 3.55,
+          "CH": 3.6,
+          "MEDIA": 3.85,
+          "IDU": 17
+        }
+      ],
+      "media_geral_sem_pcd": {
+        "unidade": "MÉDIA GERAL DA REDE(SEM PCD)",
+        "LG": 5.9102,
+        "MA": 3.4774,
+        "CN": 4.3897,
+        "CH": 4.9959,
+        "MEDIA": 4.8743
+      },
+      "media_geral_com_pcd": {
+        "unidade": "MÉDIA GERAL DA REDE (COM PCD)",
+        "LG": 5.7641,
+        "MA": 3.4138,
+        "CN": 4.3004,
+        "CH": 4.8927,
+        "MEDIA": 4.7668
+      }
+    },
+    {
+      "ano": 9,
+      "avaliacao": "Avaliação Diagnóstica 2026",
+      "disciplinas": [
+        "LG",
+        "MA",
+        "CN",
+        "CH"
+      ],
+      "unidades": [
+        {
+          "unidade": "ETI MONSENHOR PIAGEM",
+          "LG": 7.92,
+          "MA": 4.1,
+          "CN": 6.58,
+          "CH": 6.36,
+          "MEDIA": 6.39,
+          "IDU": 42
+        },
+        {
+          "unidade": "ETI VINICIUS DE MORAES",
+          "LG": 7.33,
+          "MA": 3.62,
+          "CN": 4.41,
+          "CH": 5.67,
+          "MEDIA": 5.62,
+          "IDU": 54
+        },
+        {
+          "unidade": "ETI MARCOS FREIRE",
+          "LG": 7.89,
+          "MA": 3.67,
+          "CN": 4.3,
+          "CH": 4.59,
+          "MEDIA": 5.57,
+          "IDU": 38
+        },
+        {
+          "unidade": "ETI PE JOSIMO TAVARES",
+          "LG": 7.21,
+          "MA": 3.33,
+          "CN": 4.83,
+          "CH": 5.45,
+          "MEDIA": 5.49,
+          "IDU": 53
+        },
+        {
+          "unidade": "EM ANNE FRANK",
+          "LG": 7.16,
+          "MA": 3.27,
+          "CN": 4.77,
+          "CH": 5.15,
+          "MEDIA": 5.38,
+          "IDU": 19
+        },
+        {
+          "unidade": "EM DARCY RIBEIRO",
+          "LG": 6.95,
+          "MA": 3.27,
+          "CN": 4.98,
+          "CH": 5.39,
+          "MEDIA": 5.38,
+          "IDU": 27
+        },
+        {
+          "unidade": "EM BEATRIZ RODRIGUES",
+          "LG": 6.9,
+          "MA": 3.67,
+          "CN": 4.55,
+          "CH": 5.21,
+          "MEDIA": 5.37,
+          "IDU": 21
+        },
+        {
+          "unidade": "EM AURELIO BUARQUE",
+          "LG": 7.01,
+          "MA": 3.48,
+          "CN": 4.52,
+          "CH": 5.05,
+          "MEDIA": 5.32,
+          "IDU": 18
+        },
+        {
+          "unidade": "ETI PROF FIDENCIO BOGO",
+          "LG": 7.06,
+          "MA": 2.97,
+          "CN": 4.22,
+          "CH": 5.57,
+          "MEDIA": 5.30,
+          "IDU": 91
+        },
+        {
+          "unidade": "EM THIAGO BARBOSA",
+          "LG": 6.91,
+          "MA": 3.11,
+          "CN": 4.54,
+          "CH": 5.39,
+          "MEDIA": 5.27,
+          "IDU": 51
+        },
+        {
+          "unidade": "EM HENRIQUE TALONE",
+          "LG": 6.78,
+          "MA": 3.21,
+          "CN": 4.52,
+          "CH": 5.42,
+          "MEDIA": 5.25,
+          "IDU": 32
+        },
+        {
+          "unidade": "ETI ANISIO TEIXEIRA",
+          "LG": 7.17,
+          "0, MA": 3.03,
+          "CN": 4.52,
+          "CH": 4.91,
+          "MEDIA": 5.23,
+          "IDU": 82
+        },
+        {
+          "unidade": "ETI APRIGIO DE MATOS",
+          "LG": 7.01,
+          "MA": 3.43,
+          "CN": 4.33,
+          "CH": 4.67,
+          "MEDIA": 5.2,
+          "IDU": 20
+        },
+        {
+          "unidade": "EM MESTRE PACIFICO",
+          "LG": 6.5,
+          "MA": 3.48,
+          "CN": 4.52,
+          "CH": 4.88,
+          "MEDIA": 5.09,
+          "IDU": 41
+        },
+        {
+          "unidade": "ETI CAROLINE CAMPELO",
+          "LG": 6.62,
+          "MA": 3.33,
+          "CN": 4.85,
+          "CH": 4.42,
+          "MEDIA": 5.02,
+          "IDU": 64
+        },
+        {
+          "unidade": "ETI ALMIRANTE TAMANDARE",
+          "LG": 6.45,
+          "MA": 3.2,
+          "CN": 3.84,
+          "CH": 4.92,
+          "MEDIA": 4.93,
+          "IDU": 85
+        },
+        {
+          "unidade": "EM JORGE AMADO",
+          "LG": 6.18,
+          "MA": 3.03,
+          "CN": 4.35,
+          "CH": 4.16,
+          "MEDIA": 4.66,
+          "IDU": 33
+        },
+        {
+          "unidade": "ETI PROFA SUELI RECHE",
+          "LG": 6.39,
+          "MA": 3.23,
+          "CN": 3.78,
+          "CH": 3.67,
+          "MEDIA": 4.6,
+          "IDU": 50
+        },
+        {
+          "unidade": "ETI LUIZ GONZAGA",
+          "LG": 6.12,
+          "MA": 3.09,
+          "CN": 3.66,
+          "CH": 3.97,
+          "MEDIA": 4.52,
+          "IDU": 44
+        },
+        {
+          "unidade": "EM MARIA ROSA",
+          "LG": 5.87,
+          "MA": 2.82,
+          "CN": 4.14,
+          "CH": 4.36,
+          "MEDIA": 4.51,
+          "IDU": 40
+        },
+        {
+          "unidade": "ETI DANIEL BATISTA",
+          "LG": 5.77,
+          "MA": 3.16,
+          "CN": 4.1,
+          "CH": 3.98,
+          "MEDIA": 4.46,
+          "IDU": 26
+        },
+        {
+          "unidade": "ETI PROFA MARGARIDA",
+          "LG": 6.06,
+          "MA": 2.78,
+          "CN": 3.57,
+          "CH": 3.81,
+          "MEDIA": 4.37,
+          "IDU": 81
+        },
+        {
+          "unidade": "ETI EURIDICE DE MELLO",
+          "LG": 5.71,
+          "MA": 2.97,
+          "CN": 3.76,
+          "CH": 3.98,
+          "MEDIA": 4.35,
+          "IDU": 52
+        },
+        {
+          "unidade": "EM ANTONIO CARLOS JOBIM",
+          "LG": 5.77,
+          "MA": 2.85,
+          "CN": 3.66,
+          "CH": 3.54,
+          "MEDIA": 4.22,
+          "IDU": 16
+        },
+        {
+          "unidade": "EM ANTONIO GONCALVES",
+          "LG": 5.11,
+          "MA": 2.74,
+          "CN": 2.77,
+          "CH": 3.38,
+          "MEDIA": 3.8,
+          "IDU": 17
+        }
+      ],
+      "media_geral_sem_pcd": {
+        "unidade": "MÉDIA GERAL DA REDE(SEM PCD)",
+        "LG": 6.7419,
+        "MA": 3.2718,
+        "CN": 4.4819,
+        "CH": 4.8236,
+        "MEDIA": 5.1073
+      },
+      "media_geral_com_pcd": {
+        "unidade": "MÉDIA GERAL DA REDE (COM PCD)",
+        "LG": 6.5585,
+        "MA": 3.1998,
+        "CN": 4.35,
+        "CH": 4.706,
+        "MEDIA": 4.9748
+      }
+    }
+  ]
+}
