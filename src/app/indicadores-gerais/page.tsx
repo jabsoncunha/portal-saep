@@ -22,7 +22,7 @@ export default function IndicadoresGeraisPage() {
   if (!data) return null;
 
   // Ordenar unidades por média para o ranking
-  const rankedUnidades = [...data.unidades].sort((a, b) => b.MEDIA - a.MEDIA);
+  const rankedUnidades = [...(data.unidades as any[])].sort((a: any, b: any) => b.MEDIA - a.MEDIA);
 
   const getScoreColor = (score: number) => {
     if (score >= 8) return "text-emerald-600";

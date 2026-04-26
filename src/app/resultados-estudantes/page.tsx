@@ -161,7 +161,7 @@ export default function ResultadosEstudantesPage() {
                 className="flex-1 bg-transparent border-none outline-none font-black text-xs text-slate-700 py-2 uppercase appearance-none cursor-pointer"
               >
                 <option value="TODAS">TODAS AS UNIDADES</option>
-                {allUnidades.filter(u => u !== "TODAS").map(u => (
+                {allUnidades.filter((u: string) => u !== "TODAS").map((u: string) => (
                   <option key={u} value={u}>{u}</option>
                 ))}
               </select>
@@ -176,7 +176,7 @@ export default function ResultadosEstudantesPage() {
                 disabled={selectedUnidade === "TODAS"}
               >
                 <option value="TODAS">TODAS AS TURMAS</option>
-                {allTurmas.filter(t => t !== "TODAS").map(t => (
+                {allTurmas.filter((t: string) => t !== "TODAS").map((t: string) => (
                   <option key={t} value={t}>{t}</option>
                 ))}
               </select>

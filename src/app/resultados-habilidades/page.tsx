@@ -164,7 +164,7 @@ export default function ResultadosHabilidadesPage() {
                 </thead>
                 <tbody className="divide-y divide-slate-100">
                   {filteredUnidades.length > 0 ? (
-                    filteredUnidades.map((unidade, idx) => (
+                    filteredUnidades.map((unidade: any, idx: number) => (
                       <tr key={idx} className="group hover:bg-slate-50 transition-colors">
                         <td className="sticky left-0 z-20 bg-white group-hover:bg-slate-50 p-6 border-r border-slate-200 shadow-[4px_0_10px_-4px_rgba(0,0,0,0.05)]">
                           <div className="flex items-center gap-3">
