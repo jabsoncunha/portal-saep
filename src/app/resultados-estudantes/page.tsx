@@ -56,13 +56,13 @@ export default function ResultadosEstudantesPage() {
   
   const currentAnoData = (dynamicData as any).anos_escolares.find((a: any) => a.ano === selectedAno);
   
-  const allUnidades = useMemo(() => {
+  const allUnidades = useMemo<string[]>(() => {
     if (!currentAnoData) return [];
     const unidades = new Set(currentAnoData.estudantes.map((e: Estudante) => e.unidade));
     return ["TODAS", ...Array.from(unidades).sort()];
   }, [currentAnoData]);
 
-  const allTurmas = useMemo(() => {
+  const allTurmas = useMemo<string[]>(() => {
     if (!currentAnoData || selectedUnidade === "TODAS") return ["TODAS"];
     const turmas = new Set(
       currentAnoData.estudantes
