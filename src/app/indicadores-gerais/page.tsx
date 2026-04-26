@@ -145,7 +145,7 @@ export default function IndicadoresGeraisPage() {
                   Top Unidades do {selectedAno}º Ano
                 </h4>
                 <div className="space-y-4">
-                  {(rankedUnidades as any[]).slice(0, 5).map((u, i) => (
+                  {(rankedUnidades as any[]).slice(0, 5).map((u: any, i: number) => (
                     <div key={i} className="flex items-center justify-between p-4 bg-white/5 rounded-2xl border border-white/10 group hover:bg-white/10 transition-all">
                       <div className="flex items-center gap-4">
                         <span className={`w-8 h-8 flex items-center justify-center rounded-full text-xs font-black ${

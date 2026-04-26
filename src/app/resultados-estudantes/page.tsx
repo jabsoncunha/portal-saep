@@ -77,9 +77,9 @@ export default function ResultadosEstudantesPage() {
     setSelectedTurma("TODAS");
   }, [selectedUnidade]);
 
-  const filteredEstudantes = useMemo(() => {
+  const filteredEstudantes = useMemo<Estudante[]>(() => {
     if (!currentAnoData) return [];
-    return currentAnoData.estudantes.filter((e: Estudante) => {
+    return (currentAnoData.estudantes as Estudante[]).filter((e: Estudante) => {
       const matchSearch = e.nome.toLowerCase().includes(searchTerm.toLowerCase()) || 
                           e.matricula.toString().includes(searchTerm);
       const matchUnidade = selectedUnidade === "TODAS" || e.unidade === selectedUnidade;
@@ -207,7 +207,7 @@ export default function ResultadosEstudantesPage() {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100">
-                  {filteredEstudantes.map((estudante, idx) => (
+                  {filteredEstudantes.map((estudante: Estudante, idx: number) => (
                     <tr key={estudante.matricula} className="group hover:bg-slate-50 transition-colors">
                       <td className="p-6">
                         <div className="flex items-center gap-4">

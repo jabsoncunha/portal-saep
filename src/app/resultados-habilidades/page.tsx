@@ -152,7 +152,7 @@ export default function ResultadosHabilidadesPage() {
                     <th className="sticky left-0 z-20 bg-slate-50 p-6 text-left min-w-[320px] border-r border-slate-200">
                       <span className="text-[11px] font-black text-slate-400 uppercase tracking-widest">Unidade Escolar</span>
                     </th>
-                    {(filteredQuestoes as any[]).map((q) => (
+                    {(filteredQuestoes as any[]).map((q: any) => (
                       <th key={String(q.questao)} className="p-4 text-center min-w-[85px] border-r border-slate-100">
                         <div className="flex flex-col items-center gap-1">
                           <span className="text-[9px] font-black text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full">{q.questao}</span>
@@ -174,7 +174,7 @@ export default function ResultadosHabilidadesPage() {
                             <span className="text-sm font-black text-slate-700 truncate max-w-[240px]">{unidade.unidade}</span>
                           </div>
                         </td>
-                        {(filteredQuestoes as any[]).map((q) => {
+                        {(filteredQuestoes as any[]).map((q: any) => {
                           const hData = (unidade.habilidades as any[]).find(h => h.questao === q.questao);
                           // Garantir que pct seja um número válido, mesmo se hData ou rendimento_pct for null
                           const pct = (hData && typeof hData.rendimento_pct === "number") ? hData.rendimento_pct : 0;
