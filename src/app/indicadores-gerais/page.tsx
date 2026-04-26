@@ -17,7 +17,7 @@ import resultadosData from "@/data/resultados_2026.json";
 
 export default function IndicadoresGeraisPage() {
   const [selectedAno, setSelectedAno] = useState(1);
-  const data = resultadosData.anos_escolares.find(a => a.ano === selectedAno);
+  const data = (resultadosData as any).anos_escolares.find((a: any) => a.ano === selectedAno);
 
   if (!data) return null;
 
@@ -54,9 +54,9 @@ export default function IndicadoresGeraisPage() {
 
             {/* Filtro de Ano Escolar */}
             <div className="flex items-center gap-2 bg-slate-100 p-1.5 rounded-2xl border border-slate-200">
-              {resultadosData.anos_escolares.map((anoItem) => (
+              {(resultadosData as any).anos_escolares.map((anoItem: any) => (
                 <button
-                  key={anoItem.ano}
+                  key={String(anoItem.ano)}
                   onClick={() => setSelectedAno(anoItem.ano)}
                   className={`px-4 py-2 rounded-xl font-black text-sm transition-all ${
                     selectedAno === anoItem.ano 
@@ -145,7 +145,7 @@ export default function IndicadoresGeraisPage() {
                   Top Unidades do {selectedAno}º Ano
                 </h4>
                 <div className="space-y-4">
-                  {rankedUnidades.slice(0, 5).map((u, i) => (
+                  {(rankedUnidades as any[]).slice(0, 5).map((u, i) => (
                     <div key={i} className="flex items-center justify-between p-4 bg-white/5 rounded-2xl border border-white/10 group hover:bg-white/10 transition-all">
                       <div className="flex items-center gap-4">
                         <span className={`w-8 h-8 flex items-center justify-center rounded-full text-xs font-black ${

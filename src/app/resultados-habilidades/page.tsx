@@ -19,7 +19,7 @@ export default function ResultadosHabilidadesPage() {
   const [selectedComponente, setSelectedComponente] = useState("LÍNGUA PORTUGUESA (LP)");
   const [searchTerm, setSearchTerm] = useState("");
   
-  const currentAnoData = habilidadesData.anos_escolares.find(a => a.ano === selectedAno);
+  const currentAnoData = (habilidadesData as any).anos_escolares.find((a: any) => a.ano === selectedAno);
   
   // Se o componente selecionado não existir no novo ano, reseta para o primeiro disponível
   useEffect(() => {
@@ -31,13 +31,13 @@ export default function ResultadosHabilidadesPage() {
   if (!currentAnoData) return null;
 
   // Filtrar unidades pela busca
-  const filteredUnidades = currentAnoData.unidades.filter(u => 
+  const filteredUnidades = (currentAnoData?.unidades || []).filter((u: any) => 
     u.unidade.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   // Filtrar questões do componente selecionado
-  const filteredQuestoes = currentAnoData.questoes.filter(q => q.componente === selectedComponente);
-  const questaoKeys = filteredQuestoes.map(q => q.questao);
+  const filteredQuestoes = (currentAnoData?.questoes || []).filter((q: any) => q.componente === selectedComponente);
+  const questaoKeys = filteredQuestoes.map((q: any) => q.questao);
 
   const getHeatmapColor = (pct: number) => {
     if (pct >= 90) return "bg-emerald-500 text-white";
@@ -92,7 +92,7 @@ export default function ResultadosHabilidadesPage() {
 
               {/* Filtro Componente */}
               <div className="flex bg-slate-100 p-1.5 rounded-2xl border border-slate-200">
-                {currentAnoData.componentes_curriculares.map((comp) => (
+                {(currentAnoData?.componentes_curriculares as string[] || []).map((comp) => (
                   <button
                     key={comp}
                     onClick={() => setSelectedComponente(comp)}
@@ -152,8 +152,8 @@ export default function ResultadosHabilidadesPage() {
                     <th className="sticky left-0 z-20 bg-slate-50 p-6 text-left min-w-[320px] border-r border-slate-200">
                       <span className="text-[11px] font-black text-slate-400 uppercase tracking-widest">Unidade Escolar</span>
                     </th>
-                    {filteredQuestoes.map((q) => (
-                      <th key={q.questao} className="p-4 text-center min-w-[85px] border-r border-slate-100">
+                    {(filteredQuestoes as any[]).map((q) => (
+                      <th key={String(q.questao)} className="p-4 text-center min-w-[85px] border-r border-slate-100">
                         <div className="flex flex-col items-center gap-1">
                           <span className="text-[9px] font-black text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full">{q.questao}</span>
                           <span className="text-[10px] font-black text-slate-900 tracking-tighter whitespace-nowrap">{q.habilidade}</span>
@@ -174,12 +174,12 @@ export default function ResultadosHabilidadesPage() {
                             <span className="text-sm font-black text-slate-700 truncate max-w-[240px]">{unidade.unidade}</span>
                           </div>
                         </td>
-                        {filteredQuestoes.map((q) => {
-                          const hData = unidade.habilidades.find(h => h.questao === q.questao);
+                        {(filteredQuestoes as any[]).map((q) => {
+                          const hData = (unidade.habilidades as any[]).find(h => h.questao === q.questao);
                           // Garantir que pct seja um número válido, mesmo se hData ou rendimento_pct for null
                           const pct = (hData && typeof hData.rendimento_pct === "number") ? hData.rendimento_pct : 0;
                           return (
-                            <td key={q.questao} className="p-1 border-r border-slate-50">
+                            <td key={String(q.questao)} className="p-1 border-r border-slate-50">
                               <div className={`h-11 flex items-center justify-center rounded-xl font-black text-[11px] transition-transform hover:scale-110 cursor-default ${getHeatmapColor(pct)}`}>
                                 {pct.toFixed(0)}%
                               </div>
