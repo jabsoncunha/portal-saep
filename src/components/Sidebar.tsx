@@ -54,21 +54,21 @@ export default function Sidebar() {
   };
 
   return (
-    <aside className="w-72 bg-[#002B5B] text-white flex flex-col h-screen sticky top-0 border-r border-white/10">
+    <aside className="w-72 bg-[#002B5B] text-white flex flex-col fixed inset-y-0 left-0 z-50 border-r border-white/10">
       {/* Logo */}
-      <Link href="/" className="py-10 flex flex-col items-center justify-center hover:bg-white/5 transition-colors cursor-pointer">
-        <div className="relative w-56 h-56 flex-shrink-0">
+      <Link href="/" className="py-14 flex flex-col items-center justify-center hover:bg-white/5 transition-colors cursor-pointer">
+        <div className="relative w-64 h-64 flex-shrink-0">
           <Image
             src="/logodae.jpeg"
             alt="Logo DAE"
             fill
-            className="object-contain rounded-[40px] shadow-2xl"
+            className="object-contain rounded-[48px] shadow-2xl border border-white/10"
           />
         </div>
       </Link>
 
       {/* Nav */}
-      <nav className="flex-1 px-4 space-y-2 overflow-y-auto custom-scrollbar">
+      <nav className="flex-1 px-4 space-y-4 overflow-y-auto custom-scrollbar mt-4">
         {menuItems.map((item: any) => {
           const Icon = item.icon;
           const isActive = pathname === item.href;
@@ -78,21 +78,21 @@ export default function Sidebar() {
             <Link
               key={item.name}
               href={isLocked ? "/login" : item.href}
-              className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 group ${
+              className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 group ${
                 isActive
-                  ? "bg-white/15 text-white shadow-sm"
+                  ? "bg-white/15 text-white shadow-lg border border-white/10"
                   : "text-blue-100/70 hover:bg-white/10 hover:text-white"
               }`}
             >
               <Icon
-                size={24}
+                size={20}
                 className={
                   isActive
                     ? "text-blue-300"
                     : "group-hover:text-blue-300 transition-colors"
                 }
               />
-              <span className="font-bold text-xl flex-1">{item.name}</span>
+              <span className="font-black text-base flex-1 uppercase tracking-tight">{item.name}</span>
               {isLocked && (
                 <Lock size={14} className="text-blue-400/50 flex-shrink-0" />
               )}
@@ -100,7 +100,8 @@ export default function Sidebar() {
           );
         })}
 
-        <div className="pt-2 space-y-1">
+        <div className="pt-8 space-y-2 border-t border-white/5 mt-8">
+          <p className="px-4 text-[10px] font-black text-blue-400/50 uppercase tracking-[0.3em] mb-4">Documentos e Guias</p>
           {documents.map((doc: any) => {
             const Icon = doc.icon;
             const isActive = pathname === doc.href;
@@ -109,21 +110,21 @@ export default function Sidebar() {
               <Link
                 key={doc.name}
                 href={isAuthenticated ? doc.href : "/login"}
-                className={`flex items-center gap-3 px-4 py-2 text-sm transition-all rounded-lg group ${
+                className={`flex items-center gap-3 px-4 py-3 text-base transition-all rounded-xl group ${
                   isActive
-                    ? "bg-white/10 text-white shadow-sm"
+                    ? "bg-white/10 text-white shadow-sm border border-white/10"
                     : "text-blue-100/60 hover:text-white hover:bg-white/5"
                 }`}
               >
                 <Icon
-                  size={22}
+                  size={20}
                   className={
                     isActive
                       ? "text-blue-300"
                       : "group-hover:text-blue-300 transition-colors"
                   }
                 />
-                <span className="font-bold text-lg flex-1">{doc.name}</span>
+                <span className="font-bold text-base flex-1">{doc.name}</span>
                 {!isAuthenticated && (
                   <Lock size={12} className="text-blue-400/40 flex-shrink-0" />
                 )}

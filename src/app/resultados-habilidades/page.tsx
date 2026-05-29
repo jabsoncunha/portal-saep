@@ -1,43 +1,140 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
 import { 
   ChevronRight, 
   Lightbulb, 
   Target, 
   Info,
-  Search,
-  Filter,
   Download,
-  ArrowRight
+  Filter,
+  BarChart
 } from "lucide-react";
-import habilidadesData from "@/data/habilidades_2026.json";
+import { supabase } from "@/lib/supabase";
+import { useAuth } from "@/context/AuthContext";
+
+interface QuestaoGabarito {
+  item: string;
+  gabarito: string;
+  habilidade: string;
+  disciplina: string;
+}
 
 export default function ResultadosHabilidadesPage() {
+  const { user } = useAuth();
   const [selectedAno, setSelectedAno] = useState(1);
-  const [selectedComponente, setSelectedComponente] = useState("LÍNGUA PORTUGUESA (LP)");
-  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedAvaliacao, setSelectedAvaliacao] = useState("ad_2026");
+  const [selectedComponente, setSelectedComponente] = useState("LÍNGUA PORTUGUESA");
+  const [isLoading, setIsLoading] = useState(true);
   
-  const currentAnoData = (habilidadesData as any).anos_escolares.find((a: any) => a.ano === selectedAno);
-  
-  // Se o componente selecionado não existir no novo ano, reseta para o primeiro disponível
+  const [gabarito, setGabarito] = useState<QuestaoGabarito[]>([]);
+  const [turmasData, setTurmasData] = useState<any[]>([]);
+  const [componentes, setComponentes] = useState<string[]>([]);
+
   useEffect(() => {
-    if (currentAnoData && !currentAnoData.componentes_curriculares.includes(selectedComponente)) {
-      setSelectedComponente(currentAnoData.componentes_curriculares[0]);
+    async function fetchData() {
+      if (!user?.inep) return;
+      setIsLoading(true);
+      
+      try {
+        const respTable = `respostas_${selectedAno}ano_${selectedAvaliacao}`;
+        const gabTable = `gabarito_${selectedAno}ano_${selectedAvaliacao}`;
+
+        const [respRes, gabRes] = await Promise.all([
+          supabase.from(respTable).select("*").eq("inep", user.inep),
+          supabase.from(gabTable).select("*")
+        ]);
+
+        if (respRes.error) throw respRes.error;
+        if (gabRes.error) throw gabRes.error;
+
+        const students = respRes.data || [];
+        const gabItems = (gabRes.data || []) as QuestaoGabarito[];
+        
+        setGabarito(gabItems);
+
+        // Identificar componentes disponíveis
+        const comps = Array.from(new Set(gabItems.map(g => g.disciplina.toUpperCase())));
+        setComponentes(comps);
+        if (!comps.includes(selectedComponente)) {
+          setSelectedComponente(comps[0] || "LÍNGUA PORTUGUESA");
+        }
+
+        // Agrupar por Turma e calcular rendimento por questão
+        const turmasMap: Record<string, any> = {};
+        
+        students.forEach(student => {
+          const tName = student.turma;
+          if (!turmasMap[tName]) {
+            turmasMap[tName] = { 
+               nome: tName, 
+               totalEstudantes: 0,
+               acertosPorQuestao: {} 
+            };
+          }
+          turmasMap[tName].totalEstudantes++;
+          
+          gabItems.forEach(gab => {
+            const qKey = gab.item.toLowerCase();
+            const studentAns = student[qKey];
+            if (studentAns === gab.gabarito) {
+              turmasMap[tName].acertosPorQuestao[qKey] = (turmasMap[tName].acertosPorQuestao[qKey] || 0) + 1;
+            }
+          });
+        });
+
+        const processedTurmas = Object.values(turmasMap).map(t => {
+          const rendimento: Record<string, number> = {};
+          gabItems.forEach(gab => {
+            const qKey = gab.item.toLowerCase();
+            rendimento[qKey] = t.totalEstudantes > 0 
+              ? (t.acertosPorQuestao[qKey] || 0) / t.totalEstudantes * 100 
+              : 0;
+          });
+          return { ...t, rendimento };
+        }).sort((a, b) => a.nome.localeCompare(b.nome));
+
+        setTurmasData(processedTurmas);
+      } catch (err) {
+        console.error("Erro ao processar dados de habilidades:", err);
+      } finally {
+        setIsLoading(false);
+      }
     }
-  }, [selectedAno, currentAnoData]);
 
-  if (!currentAnoData) return null;
+    fetchData();
+  }, [selectedAno, selectedAvaliacao, user?.inep, selectedComponente]);
 
-  // Filtrar unidades pela busca
-  const filteredUnidades = (currentAnoData?.unidades || []).filter((u: any) => 
-    u.unidade.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  // Auto-detect first year with data for the logged-in INEP and evaluation
+  useEffect(() => {
+    async function detectDefaultYear() {
+      if (!user?.inep) return;
+      try {
+        const years = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+        const results = await Promise.all(
+          years.map(async (ano) => {
+            const { count, error } = await supabase
+              .from(`respostas_${ano}ano_${selectedAvaliacao}`)
+              .select("*", { count: "exact", head: true })
+              .eq("inep", user.inep);
+            return { ano, count: error ? 0 : (count || 0) };
+          })
+        );
+        const firstWithData = results.find(r => r.count > 0);
+        if (firstWithData && firstWithData.ano !== selectedAno) {
+          setSelectedAno(firstWithData.ano);
+        }
+      } catch (err) {
+        console.error("Erro ao detectar ano padrão:", err);
+      }
+    }
+    detectDefaultYear();
+  }, [user?.inep, selectedAvaliacao]);
 
-  // Filtrar questões do componente selecionado
-  const filteredQuestoes = (currentAnoData?.questoes || []).filter((q: any) => q.componente === selectedComponente);
-  const questaoKeys = filteredQuestoes.map((q: any) => q.questao);
+  const filteredQuestoes = useMemo(() => {
+    return gabarito.filter(q => q.disciplina.toUpperCase() === selectedComponente);
+  }, [gabarito, selectedComponente]);
 
   const getHeatmapColor = (pct: number) => {
     if (pct >= 90) return "bg-emerald-500 text-white";
@@ -48,41 +145,39 @@ export default function ResultadosHabilidadesPage() {
   };
 
   const getLegendColor = (label: string) => {
-    if (label === "Excelente (≥ 90%)") return "bg-emerald-500";
-    if (label === "Bom (80-89%)") return "bg-emerald-400";
-    if (label === "Regular (70-79%)") return "bg-amber-400";
-    if (label === "Atenção (60-69%)") return "bg-orange-400";
+    if (label.includes("90")) return "bg-emerald-500";
+    if (label.includes("80")) return "bg-emerald-400";
+    if (label.includes("70")) return "bg-amber-400";
+    if (label.includes("60")) return "bg-orange-400";
     return "bg-rose-500";
   };
 
   return (
     <ProtectedRoute>
       <div className="flex flex-col min-h-screen bg-slate-50">
-        {/* Header */}
         <header className="px-8 py-10 bg-white border-b border-slate-200 sticky top-0 z-40">
           <div className="flex items-center gap-3 text-blue-600 mb-4">
-            <span className="text-[10px] font-black uppercase tracking-widest">Análise Pedagógica</span>
+            <span className="text-[10px] font-black uppercase tracking-widest">Gestão Escolar</span>
             <ChevronRight size={14} />
-            <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">Rendimento por Habilidade</span>
+            <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">Análise de Habilidades por Turma</span>
           </div>
           
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8">
             <div>
-              <h1 className="text-4xl font-black text-slate-900 font-outfit tracking-tight">Matriz de Habilidades 2026</h1>
-              <p className="mt-1 text-slate-500 font-bold">Visualize o rendimento detalhado por descritor em cada unidade.</p>
+              <h1 className="text-4xl font-black text-slate-900 font-outfit tracking-tight">Rendimento por Turma 2026</h1>
+              <p className="mt-1 text-slate-500 font-bold uppercase text-[10px] tracking-widest">
+                {user?.escola} — INEP {user?.inep}
+              </p>
             </div>
 
             <div className="flex flex-wrap items-center gap-4">
-              {/* Seletor de Ano */}
               <div className="flex bg-slate-100 p-1 rounded-xl border border-slate-200 mr-2">
-                {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((ano: number) => (
+                {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((ano) => (
                   <button
                     key={ano}
                     onClick={() => setSelectedAno(ano)}
                     className={`w-10 h-10 rounded-lg font-black text-xs transition-all ${
-                      selectedAno === ano 
-                        ? "bg-white text-blue-600 shadow-sm border border-slate-200" 
-                        : "text-slate-500 hover:text-slate-700"
+                      selectedAno === ano ? "bg-white text-blue-600 shadow-sm border border-slate-200" : "text-slate-500 hover:text-slate-700"
                     }`}
                   >
                     {ano}º
@@ -90,96 +185,96 @@ export default function ResultadosHabilidadesPage() {
                 ))}
               </div>
 
-              {/* Filtro Componente */}
-              <div className="flex bg-slate-100 p-1.5 rounded-2xl border border-slate-200">
-                {(currentAnoData?.componentes_curriculares as string[] || []).map((comp: string) => (
+              {/* Seletor de Avaliação */}
+              <div className="flex bg-slate-100 p-1 rounded-xl border border-slate-200 mr-2">
+                {[
+                  { id: "ad_2026", label: "DIAGNÓSTICA" },
+                  { id: "bim1_2026", label: "BIMESTRAL 1" }
+                ].map((av) => (
                   <button
-                    key={comp}
-                    onClick={() => setSelectedComponente(comp)}
-                    className={`px-6 py-2.5 rounded-xl font-black text-xs transition-all ${
-                      selectedComponente === comp 
+                    key={av.id}
+                    onClick={() => setSelectedAvaliacao(av.id)}
+                    className={`px-4 h-10 rounded-lg font-black text-[10px] transition-all ${
+                      selectedAvaliacao === av.id 
                         ? "bg-white text-blue-600 shadow-sm border border-slate-200" 
                         : "text-slate-500 hover:text-slate-700"
                     }`}
                   >
-                    {comp.replace(" (LP)", "").replace(" (MA)", "").replace(" (LG)", "").replace(" (CN)", "").replace(" (CH)", "")}
+                    {av.label}
                   </button>
                 ))}
               </div>
 
-              <button className="flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-2xl font-black text-xs hover:bg-blue-700 transition-all shadow-lg shadow-blue-100">
-                <Download size={16} />
-                EXPORTAR
-              </button>
+              <div className="flex bg-slate-100 p-1.5 rounded-2xl border border-slate-200">
+                {componentes.map((comp) => (
+                  <button
+                    key={comp}
+                    onClick={() => setSelectedComponente(comp)}
+                    className={`px-6 py-2.5 rounded-xl font-black text-xs transition-all ${
+                      selectedComponente === comp ? "bg-white text-blue-600 shadow-sm border border-slate-200" : "text-slate-500 hover:text-slate-700"
+                    }`}
+                  >
+                    {comp}
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
         </header>
 
         <main className="p-8">
-          {/* Toolbar: Busca e Legenda */}
           <div className="mb-8 flex flex-col md:flex-row gap-6 items-stretch md:items-center">
-            <div className="relative flex-1 group">
-              <Search className="absolute left-6 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-blue-500 transition-colors" size={20} />
-              <input 
-                type="text" 
-                placeholder="Buscar unidade escolar..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-14 pr-8 py-5 bg-white rounded-[24px] border border-slate-200 shadow-sm focus:outline-none focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 font-bold text-slate-700 transition-all"
-              />
-            </div>
-
-            <div className="flex flex-wrap items-center gap-4 bg-white px-8 py-5 rounded-[24px] border border-slate-200 shadow-sm">
+            <div className="flex flex-wrap items-center gap-4 bg-white px-8 py-5 rounded-[24px] border border-slate-200 shadow-sm flex-1">
               <div className="flex items-center gap-2 text-[10px] font-black text-slate-400 uppercase tracking-widest mr-2">
                 <Info size={14} />
-                Níveis:
+                Níveis de Aprendizagem:
               </div>
-              {["Excelente (≥ 90%)", "Bom (80-89%)", "Regular (70-79%)", "Atenção (60-69%)", "Crítico (< 60%)"].map((label: string) => (
+              {["Excelente (≥ 90%)", "Bom (80-89%)", "Regular (70-79%)", "Atenção (60-69%)", "Crítico (< 60%)"].map((label) => (
                 <div key={label} className="flex items-center gap-2">
                   <div className={`w-3 h-3 rounded-md ${getLegendColor(label)}`} />
-                  <span className="text-[10px] font-bold text-slate-600 whitespace-nowrap">{label.split(" (")[0]}</span>
+                  <span className="text-[10px] font-bold text-slate-600">{label.split(" (")[0]}</span>
                 </div>
               ))}
             </div>
           </div>
 
-          {/* Tabela Heatmap */}
           <div className="bg-white rounded-[32px] border border-slate-200 shadow-xl overflow-hidden">
-            <div className="overflow-x-auto">
-              <table className="w-full border-collapse">
-                <thead>
-                  <tr className="bg-slate-50 border-b border-slate-200">
-                    <th className="sticky left-0 z-20 bg-slate-50 p-6 text-left min-w-[320px] border-r border-slate-200">
-                      <span className="text-[11px] font-black text-slate-400 uppercase tracking-widest">Unidade Escolar</span>
-                    </th>
-                    {(filteredQuestoes as any[]).map((q: any) => (
-                      <th key={String(q.questao)} className="p-4 text-center min-w-[85px] border-r border-slate-100">
-                        <div className="flex flex-col items-center gap-1">
-                          <span className="text-[9px] font-black text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full">{q.questao}</span>
-                          <span className="text-[10px] font-black text-slate-900 tracking-tighter whitespace-nowrap">{q.habilidade}</span>
-                        </div>
+            {isLoading ? (
+              <div className="p-40 text-center flex flex-col items-center gap-4">
+                <div className="w-16 h-16 border-4 border-blue-600/20 border-t-blue-600 rounded-full animate-spin" />
+                <p className="font-bold text-slate-500">Calculando rendimento pedagógico das turmas...</p>
+              </div>
+            ) : (
+              <div className="overflow-x-auto">
+                <table className="w-full border-collapse">
+                  <thead>
+                    <tr className="bg-slate-50 border-b border-slate-200">
+                      <th className="sticky left-0 z-20 bg-slate-50 p-6 text-left min-w-[200px] border-r border-slate-200">
+                        <span className="text-[11px] font-black text-slate-400 uppercase tracking-widest">Turma</span>
                       </th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-slate-100">
-                  {filteredUnidades.length > 0 ? (
-                    filteredUnidades.map((unidade: any, idx: number) => (
+                      {filteredQuestoes.map((q) => (
+                        <th key={q.item} className="p-4 text-center min-w-[85px] border-r border-slate-100">
+                          <div className="flex flex-col items-center gap-1">
+                            <span className="text-[9px] font-black text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full">{q.item.toUpperCase()}</span>
+                            <span className="text-[10px] font-black text-slate-900 tracking-tighter whitespace-nowrap">{q.habilidade}</span>
+                          </div>
+                        </th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-slate-100">
+                    {turmasData.map((turma, idx) => (
                       <tr key={idx} className="group hover:bg-slate-50 transition-colors">
                         <td className="sticky left-0 z-20 bg-white group-hover:bg-slate-50 p-6 border-r border-slate-200 shadow-[4px_0_10px_-4px_rgba(0,0,0,0.05)]">
-                          <div className="flex items-center gap-3">
-                            <div className="w-8 h-8 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center text-[10px] font-black">
-                              {idx + 1}
-                            </div>
-                            <span className="text-sm font-black text-slate-700 truncate max-w-[240px]">{unidade.unidade}</span>
+                          <div className="flex flex-col">
+                            <span className="text-sm font-black text-slate-700">{turma.nome}</span>
+                            <span className="text-[10px] text-slate-400 font-bold">{turma.totalEstudantes} Estudantes</span>
                           </div>
                         </td>
-                        {(filteredQuestoes as any[]).map((q: any) => {
-                          const hData = (unidade.habilidades as any[]).find((h: any) => h.questao === q.questao);
-                          // Garantir que pct seja um número válido, mesmo se hData ou rendimento_pct for null
-                          const pct = (hData && typeof hData.rendimento_pct === "number") ? hData.rendimento_pct : 0;
+                        {filteredQuestoes.map((q) => {
+                          const pct = turma.rendimento[q.item.toLowerCase()] || 0;
                           return (
-                            <td key={String(q.questao)} className="p-1 border-r border-slate-50">
+                            <td key={q.item} className="p-1 border-r border-slate-50">
                               <div className={`h-11 flex items-center justify-center rounded-xl font-black text-[11px] transition-transform hover:scale-110 cursor-default ${getHeatmapColor(pct)}`}>
                                 {pct.toFixed(0)}%
                               </div>
@@ -187,56 +282,24 @@ export default function ResultadosHabilidadesPage() {
                           );
                         })}
                       </tr>
-                    ))
-                  ) : (
-                    <tr>
-                      <td colSpan={filteredQuestoes.length + 1} className="p-20 text-center">
-                        <div className="flex flex-col items-center gap-4">
-                          <div className="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center text-slate-400">
-                            <Search size={32} />
-                          </div>
-                          <p className="font-bold text-slate-500">Nenhuma escola encontrada com esse nome.</p>
-                        </div>
-                      </td>
-                    </tr>
-                  )}
-                </tbody>
-              </table>
-            </div>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
           </div>
 
-          {/* Cards de Descritores */}
-          <div className="mt-12">
-            <div className="flex items-center gap-3 mb-8">
-              <div className="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center text-white shadow-lg shadow-blue-100">
-                <Lightbulb size={20} />
+          <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="bg-[#003B7E] p-8 rounded-[32px] text-white shadow-xl flex items-center gap-6">
+              <div className="w-16 h-16 rounded-2xl bg-white/10 flex items-center justify-center">
+                <BarChart className="text-[#00d2ff]" size={32} />
               </div>
-              <h3 className="text-2xl font-black text-slate-900 tracking-tight">Destaque de Habilidades</h3>
+              <div>
+                <p className="text-blue-200 text-xs font-black uppercase tracking-widest">Total de Turmas</p>
+                <h4 className="text-3xl font-black">{turmasData.length}</h4>
+              </div>
             </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {(filteredQuestoes as any[]).slice(0, 6).map((q: any, i: number) => (
-                <div key={i} className="bg-white p-8 rounded-[32px] border border-slate-200 shadow-sm group hover:border-blue-400 transition-all">
-                  <div className="flex items-start justify-between mb-6">
-                    <div className="p-4 rounded-2xl bg-blue-50 text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors">
-                      <Target size={24} />
-                    </div>
-                    <span className="text-[10px] font-black bg-slate-100 text-slate-500 px-3 py-1 rounded-full uppercase tracking-widest">{q.questao}</span>
-                  </div>
-                  <h4 className="text-xl font-black text-slate-900 mb-2">{q.habilidade}</h4>
-                  <p className="text-sm text-slate-500 font-bold leading-relaxed mb-6">
-                    Descrição pedagógica mapeada para o {selectedAno}º Ano em {selectedComponente.split(" (")[0]}.
-                  </p>
-                  <div className="pt-6 border-t border-slate-100 flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <div className="w-2 h-2 rounded-full bg-blue-500" />
-                      <span className="text-xs font-black text-slate-400 uppercase tracking-wider">Tópico Base</span>
-                    </div>
-                    <span className="text-sm font-black text-slate-700">BNCC 2026</span>
-                  </div>
-                </div>
-              ))}
-            </div>
+            {/* Adicionar mais cards informativos aqui conforme necessário */}
           </div>
         </main>
       </div>
