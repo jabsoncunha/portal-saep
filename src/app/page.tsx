@@ -9,7 +9,7 @@ export default function Home() {
     <div className="flex flex-col pb-20">
       {/* Hero Section - Pure Solid #003B7E to match footer exactly */}
       <section className="relative h-[680px] flex items-center px-6 overflow-hidden bg-[#003B7E]">
-        <div className="relative z-20 pt-10 pb-20">
+        <div className="relative z-20 pt-32 pb-32">
           <div className="inline-flex items-center gap-3 px-6 py-2.5 rounded-full bg-blue-500/20 border border-blue-400/30 text-blue-200 text-lg font-black uppercase tracking-wider mb-8">
             <span className="relative flex h-3 w-3">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
@@ -26,7 +26,7 @@ export default function Home() {
             <span className="ml-4 text-blue-400">2026</span>
           </h1>
           <p className="mt-6 text-2xl text-blue-100/80 max-w-2xl leading-relaxed font-black">
-            Sistema de Avaliação Educacional de Palmas. Transformando dados em ações para uma educação de excelência.
+            Transformando dados em ações para uma educação de excelência.
           </p>
 
           {/* Action Cards - Ajustados para ficarem na mesma linha */}
@@ -65,7 +65,7 @@ export default function Home() {
 
         {/* Right side Logo - Matching Attachment */}
         <div className="absolute right-12 top-[35%] -translate-y-1/2 z-10 hidden lg:block">
-          <div className="relative w-[500px] h-[300px]">
+          <div className="relative w-[650px] h-[390px]">
             <Image 
               src="/saep-azul.jpg" 
               alt="SAEP Logo" 
@@ -78,7 +78,7 @@ export default function Home() {
       </section>
 
       {/* Main Content Grid - ALIGNED ON DIVIDER */}
-      <div className="px-6 -mt-28 relative z-30 grid grid-cols-1 lg:grid-cols-3 gap-10">
+      <div className="px-6 -mt-12 relative z-30 grid grid-cols-1 lg:grid-cols-3 gap-10">
         <InfoCard
           title="Vídeo Tutorial"
           description="Aprenda o passo a passo de como acessar a plataforma e navegar pelos painéis de resultados."
@@ -100,61 +100,61 @@ export default function Home() {
         />
       </div>
 
-      <div className="px-6 mt-32 grid grid-cols-1 xl:grid-cols-12 gap-12">
+      <div className="px-12 mt-24 grid grid-cols-1 xl:grid-cols-12 gap-16">
         {/* Text Section */}
-        <div className="xl:col-span-7 space-y-8">
+        <div className="xl:col-span-7 space-y-10">
           <div className="flex items-center gap-4">
-            <div className="h-1 w-12 bg-blue-600 rounded-full" />
-            <h2 className="text-6xl font-black text-slate-900 font-outfit uppercase tracking-tight">O que é o SAEP?</h2>
+            <div className="h-1 w-10 bg-blue-600 rounded-full" />
+            <h2 className="text-4xl font-black text-slate-900 font-outfit uppercase tracking-tight">O que é o SAEP?</h2>
           </div>
 
           <div className="grid gap-6">
-            <div className="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm border-l-[6px] border-l-blue-600 hover:shadow-md transition-shadow">
-              <h4 className="text-3xl font-black text-slate-900 mb-3">Perspectiva de Avaliação</h4>
-              <p className="text-slate-600 leading-relaxed font-bold text-xl">
+            <div className="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm border-l-[4px] border-l-blue-600 hover:shadow-md transition-shadow">
+              <h4 className="text-xl font-black text-slate-900 mb-2">Perspectiva de Avaliação</h4>
+              <p className="text-slate-600 leading-relaxed font-bold text-base">
                 O SAEP é um sistema que explora diversas situações quanto ao desenvolvimento do aluno, abandonando a perspectiva meramente quantitativa de avaliação.
               </p>
             </div>
 
-            <div className="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm border-l-[6px] border-l-blue-600 hover:shadow-md transition-shadow">
-              <h4 className="text-3xl font-black text-slate-900 mb-3">Aspectos Qualitativos</h4>
-              <p className="text-slate-600 leading-relaxed font-bold text-xl">
+            <div className="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm border-l-[4px] border-l-blue-600 hover:shadow-md transition-shadow">
+              <h4 className="text-xl font-black text-slate-900 mb-2">Aspectos Qualitativos</h4>
+              <p className="text-slate-600 leading-relaxed font-bold text-base">
                 "Buscamos contemplar também aspectos qualitativos, oferecendo subsídios para implementações de ações significativas para o desenvolvimento do aluno."
               </p>
             </div>
 
-            <div className="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm border-l-[6px] border-l-blue-600 hover:shadow-md transition-shadow">
-              <h4 className="text-3xl font-black text-slate-900 mb-3">Objetivos Estratégicos</h4>
-              <p className="text-slate-600 leading-relaxed font-bold text-xl">
-                Dentre os objetivos, destacamos a oferta à sociedade de uma análise do desempenho escolar, criação de indicadores para metas de melhoria do ensino e detecção de pontos para intervenções pedagógicas eficazes.
+            <div className="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm border-l-[4px] border-l-blue-600 hover:shadow-md transition-shadow">
+              <h4 className="text-xl font-black text-slate-900 mb-2">Objetivos Estratégicos</h4>
+              <p className="text-slate-600 leading-relaxed font-bold text-base">
+                Dentre os objetivos, destacamos a análise do desempenho escolar, criação de indicadores para metas de melhoria e detecção de pontos para intervenções pedagógicas eficazes.
               </p>
             </div>
           </div>
 
-          <div className="p-10 bg-blue-50 rounded-[40px] border border-blue-100 flex flex-col md:flex-row items-center gap-8 shadow-inner">
+          <div className="p-8 bg-blue-50/50 rounded-[40px] border border-blue-100 flex flex-col md:flex-row items-center gap-8">
             <div className="flex-1">
-              <h4 className="text-4xl font-black text-blue-900 mb-2">Compromisso com a Excelência</h4>
-              <p className="text-blue-700 font-bold text-xl leading-relaxed">Nossa missão é fornecer dados para novas estratégias metodológicas que transformem a realidade da educação pública de Palmas.</p>
+              <h4 className="text-2xl font-black text-blue-900 mb-1">Compromisso com a Excelência</h4>
+              <p className="text-blue-700 font-bold text-sm leading-relaxed">Nossa missão é fornecer dados para novas estratégias metodológicas que transformem a realidade da educação pública de Palmas.</p>
             </div>
-            <button className="px-10 py-5 bg-blue-600 text-white font-black rounded-2xl hover:bg-blue-700 transition-all shadow-lg shadow-blue-200 uppercase tracking-widest text-sm">
+            <button className="px-8 py-4 bg-blue-600 text-white font-black rounded-2xl hover:bg-blue-700 transition-all shadow-lg shadow-blue-200 uppercase tracking-widest text-[11px]">
               Saiba Mais
             </button>
           </div>
         </div>
 
         {/* Results Buttons Grid */}
-        <div className="xl:col-span-5 bg-white rounded-[48px] p-10 shadow-xl border border-slate-100">
-          <h3 className="text-4xl font-black text-slate-900 font-outfit mb-10 flex items-center gap-4">
-            <LayoutDashboard className="text-blue-600" size={40} />
-            RESULTADOS DISPONÍVEIS NOS PAINÉIS
+        <div className="xl:col-span-5 bg-white rounded-[48px] p-10 shadow-xl border border-slate-100 h-fit">
+          <h3 className="text-2xl font-black text-slate-900 font-outfit mb-8 flex items-center gap-3">
+            <LayoutDashboard className="text-blue-600" size={32} />
+            PAINÉIS DE RESULTADOS
           </h3>
 
-          <div className="grid gap-5">
+          <div className="grid gap-4">
             <Link href="/indicadores-gerais">
               <ResultButton label="UNIDADES ESCOLARES" color="bg-[#00d2ff]" />
             </Link>
-            
-            <Link href="/resultados" className="grid gap-5 cursor-pointer">
+
+            <Link href="/resultados" className="grid gap-4 cursor-pointer">
               <ResultButton label="TURMA" color="bg-[#FFD200]" />
               <ResultButton label="COMPONENTES CURRICULARES" color="bg-[#0000ff]" />
             </Link>
@@ -167,23 +167,23 @@ export default function Home() {
               <ResultButton label="ESTUDANTES" color="bg-[#003B7E]" />
             </Link>
 
-            <Link href="/resultados" className="grid gap-5 cursor-pointer">
+            <Link href="/resultados" className="grid gap-4 cursor-pointer">
               <ResultButton label="RAÇA/COR" color="bg-[#000096]" />
               <ResultButton label="ATENDIMENTO" color="bg-[#00d2ff]" />
               <ResultButton label="REGIÃO" color="bg-[#FFD200]" />
             </Link>
           </div>
 
-          <div className="mt-10 p-6 bg-slate-50 rounded-[32px] border border-slate-100">
-            <div className="flex items-center justify-between text-sm font-black text-slate-400 uppercase tracking-widest">
+          <div className="mt-8 p-6 bg-slate-50 rounded-[32px] border border-slate-100">
+            <div className="flex items-center justify-between text-[10px] font-black text-slate-400 uppercase tracking-widest">
               <span>Status dos Dados</span>
               <span className="text-green-500 flex items-center gap-1">
-                <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
                 Atualizado
               </span>
             </div>
-            <div className="mt-4 h-3 bg-slate-200 rounded-full overflow-hidden">
-              <div className="h-full bg-green-500 w-[95%] rounded-full shadow-[0_0_10px_rgba(34,197,94,0.4)]" />
+            <div className="mt-3 h-2.5 bg-slate-200 rounded-full overflow-hidden">
+              <div className="h-full bg-green-500 w-[95%] rounded-full" />
             </div>
           </div>
         </div>

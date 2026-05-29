@@ -14,13 +14,19 @@ export function MainShell({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <>
-      <Sidebar />
-      <main className="flex-1 flex flex-col h-screen overflow-y-auto relative">
-        <Header />
-        <div className="-mt-[80px]">{children}</div>
-        <Footer />
-      </main>
-    </>
+    <main className="flex min-h-screen bg-[#f8fafc]">
+      <div className="print:hidden">
+        <Sidebar />
+      </div>
+      <div className="flex-1 pl-72 print:pl-0 flex flex-col min-w-0 bg-[#f8fafc] print:bg-white">
+        <div className="print:hidden">
+          <Header />
+        </div>
+        <div className="-mt-[80px] print:mt-0 flex-1 bg-[#f8fafc] print:bg-white">{children}</div>
+        <div className="print:hidden">
+          <Footer />
+        </div>
+      </div>
+    </main>
   );
 }

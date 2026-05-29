@@ -78,7 +78,7 @@ export default function Header() {
             isScrolled ? "text-slate-800" : "text-white"
           }`}
         >
-          {isAuthenticated && user ? schoolShort : "Painel de Monitoramento SAEP"}
+          {isAuthenticated && user ? "Portal de Monitoramento" : "Painel de Monitoramento SAEP"}
         </h2>
       </div>
 
@@ -131,11 +131,11 @@ export default function Header() {
               <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#00d2ff] to-blue-600 flex items-center justify-center text-sm font-black text-white flex-shrink-0">
                 {initials}
               </div>
-              <div className="hidden sm:flex flex-col items-start leading-tight max-w-[200px]">
-                <span className="text-sm font-black uppercase tracking-wide truncate w-full">
-                  {user.escola.split(" ").slice(0, 3).join(" ")}
+              <div className="hidden sm:flex flex-col items-start leading-tight">
+                <span className={`text-[10px] font-black uppercase tracking-widest ${isScrolled ? "text-slate-400" : "text-blue-200"}`}>
+                  Acesso Gestor
                 </span>
-                <span className={`text-xs font-bold ${isScrolled ? "text-slate-400" : "text-blue-200"}`}>
+                <span className={`text-xs font-black ${isScrolled ? "text-slate-600" : "text-white"}`}>
                   INEP {user.inep}
                 </span>
               </div>
