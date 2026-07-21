@@ -21,6 +21,22 @@ import {
 } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import { useAuth } from "@/context/AuthContext";
+import { BoletimTurmaPrint } from "@/components/BoletimTurmaPrint";
+import { BoletimEstudantePrint } from "@/components/BoletimEstudantePrint";
+
+// Normaliza uma linha da tabela avaliacoes_bim2 para o formato padrão do portal
+function normalizeBim2Row(row: any): any {
+  const normalized: any = { ...row };
+  normalized.lg = row.nota_lp ?? null;
+  normalized.lp = row.nota_lp ?? null;
+  normalized.ma = row.nota_ma ?? null;
+  normalized.cn = row.nota_cn ?? null;
+  normalized.ch = row.nota_ch ?? null;
+  for (let i = 1; i <= 42; i++) {
+    if (row[`Q_${i}`] !== undefined) normalized[`q${i}`] = row[`Q_${i}`];
+  }
+  return normalized;
+}
 
 interface Respostas {
   [key: string]: string | null;
@@ -59,10 +75,16 @@ export default function ResultadosEstudantesPage() {
   const [isLoadingData, setIsLoadingData] = useState(true);
   const [isLoadingGlobal, setIsLoadingGlobal] = useState(true);
   
-  const contentRef = useRef<HTMLDivElement>(null);
+  const boletimEstudanteRef = useRef<HTMLDivElement>(null);
   const handleDownloadPDF = useReactToPrint({
-    contentRef,
-    documentTitle: selectedEstudante ? `Boletim_${selectedEstudante.nome.replace(/\s+/g, '_')}_${selectedEstudante.matricula}` : "Boletim",
+    contentRef: boletimEstudanteRef,
+    documentTitle: selectedEstudante ? `Boletim_Individual_${selectedEstudante.nome.replace(/\s+/g, '_')}_${selectedEstudante.matricula}` : "Boletim",
+  });
+
+  const boletimTurmaRef = useRef<HTMLDivElement>(null);
+  const handleDownloadBoletimTurma = useReactToPrint({
+    contentRef: boletimTurmaRef,
+    documentTitle: `Boletim_Turma_${selectedTurma}_Ano${selectedAno}`,
   });
 
   const handleExportCSV = () => {
@@ -124,14 +146,19 @@ export default function ResultadosEstudantesPage() {
       setEstudantes([]);
 
       try {
-        const tableName = `respostas_${selectedAno}ano_${selectedAvaliacao}`;
-        const gabaritoTable = `gabarito_${selectedAno}ano_${selectedAvaliacao}`;
+        const isBim2 = selectedAvaliacao === "bim2_2026";
+        const tableName = isBim2 ? "avaliacoes_bim2" : `respostas_${selectedAno}ano_${selectedAvaliacao}`;
+        const gabaritoTable = isBim2 ? "gabaritos" : `gabarito_${selectedAno}ano_${selectedAvaliacao}`;
 
         // Fetch students and gabarito in parallel
-        const [studentsRes, gabaritoRes] = await Promise.all([
-          supabase.from(tableName).select("*").eq("inep", user.inep),
-          supabase.from(gabaritoTable).select("item, gabarito")
-        ]);
+        let studentsQuery = isBim2
+          ? supabase.from(tableName).select("*").eq("ano_escolar", selectedAno).eq("inep", user.inep)
+          : supabase.from(tableName).select("*").eq("inep", user.inep);
+        let gabQuery = isBim2
+          ? supabase.from(gabaritoTable).select("item, gabarito").eq("ano_escolar", selectedAno).eq("bimestre", 2)
+          : supabase.from(gabaritoTable).select("item, gabarito");
+
+        const [studentsRes, gabaritoRes] = await Promise.all([studentsQuery, gabQuery]);
           
         if (studentsRes.error) throw studentsRes.error;
         if (gabaritoRes.error) throw gabaritoRes.error;
@@ -152,7 +179,10 @@ export default function ResultadosEstudantesPage() {
         };
 
         // Map Supabase rows to Estudante interface
-        const mapped: Estudante[] = (studentsRes.data || []).map(row => {
+        const rawStudents = (studentsRes.data || []).map((row: any) =>
+          isBim2 ? normalizeBim2Row(row) : row
+        );
+        const mapped: Estudante[] = rawStudents.map(row => {
           const respostas: Respostas = {};
           // Construct answers object from q1...q42 or q_1...q_42
           for (let i = 1; i <= 42; i++) {
@@ -202,17 +232,17 @@ export default function ResultadosEstudantesPage() {
         });
         
         // Fetch Global Data in chunks (bypassing the 1000 row limit)
-        // Busca as notas brutas de cada disciplina para calcular médias reais
+        // Para bim2, busca tudo da tabela unificada
         let allData: any[] = [];
         let from = 0;
         let to = 999;
         let hasMore = true;
 
         while (hasMore && allData.length < 50000) {
-          const { data: chunk, error: chunkErr } = await supabase
-            .from(tableName)
-            .select("*")
-            .range(from, to);
+          const chunkQuery = isBim2
+            ? supabase.from("avaliacoes_bim2").select("*").eq("ano_escolar", selectedAno).range(from, to)
+            : supabase.from(tableName).select("*").range(from, to);
+          const { data: chunk, error: chunkErr } = await chunkQuery;
 
           if (chunkErr) {
             console.error("[ERRO] Fetch global chunk falhou:", chunkErr.message, chunkErr);
@@ -220,7 +250,7 @@ export default function ResultadosEstudantesPage() {
           } else if (!chunk || chunk.length === 0) {
             hasMore = false;
           } else {
-            allData = [...allData, ...chunk];
+            allData = [...allData, ...chunk.map((r: any) => isBim2 ? normalizeBim2Row(r) : r)];
             from += 1000;
             to += 1000;
             if (chunk.length < 1000) hasMore = false;
@@ -333,8 +363,17 @@ export default function ResultadosEstudantesPage() {
       if (!user?.inep) return;
       try {
         const years = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+        const isBim2 = selectedAvaliacao === "bim2_2026";
         const results = await Promise.all(
           years.map(async (ano) => {
+            if (isBim2) {
+              const { count, error } = await supabase
+                .from("avaliacoes_bim2")
+                .select("*", { count: "exact", head: true })
+                .eq("ano_escolar", ano)
+                .eq("inep", user.inep);
+              return { ano, count: error ? 0 : (count || 0) };
+            }
             const { count, error } = await supabase
               .from(`respostas_${ano}ano_${selectedAvaliacao}`)
               .select("*", { count: "exact", head: true })
@@ -463,7 +502,8 @@ export default function ResultadosEstudantesPage() {
                 <div className="flex bg-slate-100/50 p-1.5 rounded-[24px] border border-slate-200 backdrop-blur-sm">
                   {[
                     { id: "ad_2026", label: "DIAGNÓSTICA" },
-                    { id: "bim1_2026", label: "BIMESTRAL 1" }
+                    { id: "bim1_2026", label: "BIMESTRAL 1" },
+                    { id: "bim2_2026", label: "BIMESTRAL 2" }
                   ].map((av) => (
                     <button
                       key={av.id}
@@ -492,10 +532,10 @@ export default function ResultadosEstudantesPage() {
                       Planilha (CSV)
                     </button>
                     <button 
-                      onClick={() => window.print()}
+                      onClick={() => handleDownloadBoletimTurma()}
                       className="w-full text-left px-6 py-4 font-black text-xs text-slate-700 hover:bg-slate-50 hover:text-blue-600 transition-colors"
                     >
-                      Documento (PDF)
+                      Documento (Boletim PDF)
                     </button>
                   </div>
                 </div>
@@ -503,6 +543,26 @@ export default function ResultadosEstudantesPage() {
             </div>
           </div>
         </header>
+
+        {/* Componente Invisível para Impressão do Boletim da Turma */}
+        <div className="hidden">
+          <BoletimTurmaPrint 
+            ref={boletimTurmaRef}
+            estudantes={filteredEstudantes}
+            escola={user?.escola}
+            ano={selectedAno}
+            turma={selectedTurma}
+            avaliacao={selectedAvaliacao}
+          />
+          <BoletimEstudantePrint 
+            ref={boletimEstudanteRef}
+            estudante={selectedEstudante}
+            escola={user?.escola}
+            ano={selectedAno}
+            avaliacao={selectedAvaliacao}
+            gabarito={gabarito}
+          />
+        </div>
 
         <main className="p-8 space-y-10 w-full max-w-[1600px] mx-auto mt-8 print:overflow-visible">
           {/* Central de Inteligência e Benchmarking */}
@@ -829,7 +889,7 @@ export default function ResultadosEstudantesPage() {
         {/* Modal de Detalhes do Estudante */}
         {selectedEstudante && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm overflow-y-auto print:hidden">
-            <div id="estudante-modal-content" ref={contentRef} className="bg-white w-full max-w-4xl max-h-[90vh] rounded-[40px] shadow-2xl overflow-hidden flex flex-col my-auto print:max-h-none print:shadow-none print:rounded-none">
+            <div id="estudante-modal-content" className="bg-white w-full max-w-4xl max-h-[90vh] rounded-[40px] shadow-2xl overflow-hidden flex flex-col my-auto print:max-h-none print:shadow-none print:rounded-none">
               <div className="p-8 bg-blue-600 text-white flex items-center justify-between">
                 <div className="flex items-center gap-5">
                   <div className="w-16 h-16 rounded-2xl bg-white/20 flex items-center justify-center text-3xl font-black">
@@ -930,7 +990,7 @@ export default function ResultadosEstudantesPage() {
                   className="px-8 py-4 bg-blue-600 text-white font-black rounded-2xl hover:bg-blue-700 transition-all shadow-lg shadow-blue-100 text-xs uppercase tracking-widest flex items-center gap-2"
                 >
                   <Download size={16} />
-                  PDF do Estudante
+                  Boletim do Estudante
                 </button>
               </div>
             </div>

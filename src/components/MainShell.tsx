@@ -14,7 +14,7 @@ export function MainShell({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <main className="flex min-h-screen bg-[#f8fafc]">
+    <main className="flex min-h-screen w-full bg-[#f8fafc]">
       <div className="print:hidden">
         <Sidebar />
       </div>
@@ -22,7 +22,7 @@ export function MainShell({ children }: { children: React.ReactNode }) {
         <div className="print:hidden">
           <Header />
         </div>
-        <div className="-mt-[80px] print:mt-0 flex-1 bg-[#f8fafc] print:bg-white">{children}</div>
+        <div className={`${pathname === "/" ? "-mt-[80px]" : "mt-0"} print:mt-0 flex-1 bg-[#f8fafc] print:bg-white`}>{children}</div>
         <div className="print:hidden">
           <Footer />
         </div>

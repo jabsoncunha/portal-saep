@@ -14,6 +14,20 @@ import {
 import { supabase } from "@/lib/supabase";
 import { useAuth } from "@/context/AuthContext";
 
+// Normaliza uma linha da tabela avaliacoes_bim2 para o formato padrão do portal
+// Armazena com ambos os formatos de chave (q1 e q_1) pois o lookup do gabarito
+// usa gab.item.toLowerCase() que retorna "q_1" (com underscore).
+function normalizeBim2Row(row: any): any {
+  const normalized: any = { ...row };
+  for (let i = 1; i <= 42; i++) {
+    if (row[`Q_${i}`] !== undefined) {
+      normalized[`q${i}`] = row[`Q_${i}`];   // formato sem underscore
+      normalized[`q_${i}`] = row[`Q_${i}`];  // formato com underscore (usado pelo lookup do gabarito)
+    }
+  }
+  return normalized;
+}
+
 interface QuestaoGabarito {
   item: string;
   gabarito: string;
@@ -38,19 +52,38 @@ export default function ResultadosHabilidadesPage() {
       setIsLoading(true);
       
       try {
-        const respTable = `respostas_${selectedAno}ano_${selectedAvaliacao}`;
-        const gabTable = `gabarito_${selectedAno}ano_${selectedAvaliacao}`;
+        const isBim2 = selectedAvaliacao === "bim2_2026";
+        const respTable = isBim2 ? "avaliacoes_bim2" : `respostas_${selectedAno}ano_${selectedAvaliacao}`;
+        const gabTable = isBim2 ? "gabaritos" : `gabarito_${selectedAno}ano_${selectedAvaliacao}`;
 
-        const [respRes, gabRes] = await Promise.all([
-          supabase.from(respTable).select("*").eq("inep", user.inep),
-          supabase.from(gabTable).select("*")
-        ]);
+        const respQuery = isBim2
+          ? supabase.from(respTable).select("*").eq("ano_escolar", selectedAno).eq("inep", user.inep)
+          : supabase.from(respTable).select("*").eq("inep", user.inep);
+        const gabQuery = isBim2
+          ? supabase.from(gabTable).select("*").eq("ano_escolar", selectedAno).eq("bimestre", 2)
+          : supabase.from(gabTable).select("*");
+
+        const [respRes, gabRes] = await Promise.all([respQuery, gabQuery]);
 
         if (respRes.error) throw respRes.error;
         if (gabRes.error) throw gabRes.error;
 
-        const students = respRes.data || [];
-        const gabItems = (gabRes.data || []) as QuestaoGabarito[];
+        const students = (respRes.data || []).map((row: any) =>
+          isBim2 ? normalizeBim2Row(row) : row
+        );
+
+        // Mapeamento de abreviaturas do bim2 para nomes completos
+        const DISC_MAP: Record<string, string> = {
+          LP: "L\u00cdNGUA PORTUGUESA",
+          MA: "MATEM\u00c1TICA",
+          CN: "CI\u00caNCIAS NATURAIS",
+          CH: "CI\u00caNCIAS HUMANAS",
+        };
+
+        const gabItems = (gabRes.data || []).map((g: any) => ({
+          ...g,
+          disciplina: isBim2 ? (DISC_MAP[g.disciplina?.toUpperCase()] || g.disciplina.toUpperCase()) : g.disciplina,
+        })) as QuestaoGabarito[];
         
         setGabarito(gabItems);
 
@@ -112,8 +145,17 @@ export default function ResultadosHabilidadesPage() {
       if (!user?.inep) return;
       try {
         const years = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+        const isBim2 = selectedAvaliacao === "bim2_2026";
         const results = await Promise.all(
           years.map(async (ano) => {
+            if (isBim2) {
+              const { count, error } = await supabase
+                .from("avaliacoes_bim2")
+                .select("*", { count: "exact", head: true })
+                .eq("ano_escolar", ano)
+                .eq("inep", user.inep);
+              return { ano, count: error ? 0 : (count || 0) };
+            }
             const { count, error } = await supabase
               .from(`respostas_${ano}ano_${selectedAvaliacao}`)
               .select("*", { count: "exact", head: true })
@@ -136,26 +178,23 @@ export default function ResultadosHabilidadesPage() {
     return gabarito.filter(q => q.disciplina.toUpperCase() === selectedComponente);
   }, [gabarito, selectedComponente]);
 
-  const getHeatmapColor = (pct: number) => {
-    if (pct >= 90) return "bg-emerald-500 text-white";
-    if (pct >= 80) return "bg-emerald-400 text-white";
-    if (pct >= 70) return "bg-amber-400 text-amber-950";
-    if (pct >= 60) return "bg-orange-400 text-white";
-    return "bg-rose-500 text-white";
-  };
+  const NIVEIS = [
+    { label: "Excelente", range: "≥ 90%",  color: "bg-emerald-500", text: "text-white",       min: 90 },
+    { label: "Bom",       range: "80-89%", color: "bg-emerald-400", text: "text-white",       min: 80 },
+    { label: "Regular",   range: "70-79%", color: "bg-amber-400",   text: "text-amber-950", min: 70 },
+    { label: "Atenção",   range: "60-69%", color: "bg-orange-400", text: "text-white",       min: 60 },
+    { label: "Crítico",   range: "< 60%",  color: "bg-rose-500",   text: "text-white",       min: 0  },
+  ];
 
-  const getLegendColor = (label: string) => {
-    if (label.includes("90")) return "bg-emerald-500";
-    if (label.includes("80")) return "bg-emerald-400";
-    if (label.includes("70")) return "bg-amber-400";
-    if (label.includes("60")) return "bg-orange-400";
-    return "bg-rose-500";
+  const getHeatmapColor = (pct: number) => {
+    const nivel = NIVEIS.find(n => pct >= n.min);
+    return nivel ? `${nivel.color} ${nivel.text}` : "bg-rose-500 text-white";
   };
 
   return (
     <ProtectedRoute>
       <div className="flex flex-col min-h-screen bg-slate-50">
-        <header className="px-8 py-10 bg-white border-b border-slate-200 sticky top-0 z-40">
+        <header className="px-8 py-10 bg-white border-b border-slate-200 sticky top-[72px] z-40">
           <div className="flex items-center gap-3 text-blue-600 mb-4">
             <span className="text-[10px] font-black uppercase tracking-widest">Gestão Escolar</span>
             <ChevronRight size={14} />
@@ -189,7 +228,8 @@ export default function ResultadosHabilidadesPage() {
               <div className="flex bg-slate-100 p-1 rounded-xl border border-slate-200 mr-2">
                 {[
                   { id: "ad_2026", label: "DIAGNÓSTICA" },
-                  { id: "bim1_2026", label: "BIMESTRAL 1" }
+                  { id: "bim1_2026", label: "BIMESTRAL 1" },
+                  { id: "bim2_2026", label: "BIMESTRAL 2" }
                 ].map((av) => (
                   <button
                     key={av.id}
@@ -229,10 +269,12 @@ export default function ResultadosHabilidadesPage() {
                 <Info size={14} />
                 Níveis de Aprendizagem:
               </div>
-              {["Excelente (≥ 90%)", "Bom (80-89%)", "Regular (70-79%)", "Atenção (60-69%)", "Crítico (< 60%)"].map((label) => (
-                <div key={label} className="flex items-center gap-2">
-                  <div className={`w-3 h-3 rounded-md ${getLegendColor(label)}`} />
-                  <span className="text-[10px] font-bold text-slate-600">{label.split(" (")[0]}</span>
+              {NIVEIS.map((nivel) => (
+                <div key={nivel.label} className="flex items-center gap-2">
+                  <div className={`w-3 h-3 rounded-md ${nivel.color}`} />
+                  <span className="text-[10px] font-bold text-slate-600">
+                    {nivel.label} <span className="text-slate-400">({nivel.range})</span>
+                  </span>
                 </div>
               ))}
             </div>

@@ -2,7 +2,7 @@
 
 import { Bell, Search, LogOut, School, ChevronDown } from "lucide-react";
 import { useEffect, useState, useRef } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 
 export default function Header() {
@@ -11,6 +11,10 @@ export default function Header() {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const { user, logout, isAuthenticated } = useAuth();
   const router = useRouter();
+  const pathname = usePathname();
+
+  const isHome = pathname === "/";
+  const useLightHeader = !isHome || isScrolled;
 
   useEffect(() => {
     const handleScroll = (e: any) => {
@@ -59,7 +63,7 @@ export default function Header() {
   return (
     <header
       className={`sticky top-0 z-50 w-full transition-all duration-300 px-8 py-6 flex items-center justify-between ${
-        isScrolled
+        useLightHeader
           ? "bg-white shadow-md border-b border-slate-100 py-4"
           : "bg-[#003B7E]/30 backdrop-blur-sm"
       }`}
@@ -68,14 +72,14 @@ export default function Header() {
       <div className="flex flex-col">
         <span
           className={`text-sm font-black uppercase tracking-widest ${
-            isScrolled ? "text-blue-500" : "text-blue-300"
+            useLightHeader ? "text-blue-500" : "text-blue-300"
           }`}
         >
           {isAuthenticated ? "Olá, Gestor!" : "Bem-vindo!"}
         </span>
         <h2
           className={`text-2xl font-black leading-tight max-w-2xl truncate ${
-            isScrolled ? "text-slate-800" : "text-white"
+            useLightHeader ? "text-slate-800" : "text-white"
           }`}
         >
           {isAuthenticated && user ? "Portal de Monitoramento" : "Painel de Monitoramento SAEP"}
@@ -87,17 +91,17 @@ export default function Header() {
         {/* Busca */}
         <div
           className={`hidden lg:flex items-center rounded-2xl px-5 py-3 gap-3 w-80 transition-all focus-within:w-96 border ${
-            isScrolled
+            useLightHeader
               ? "bg-slate-100 border-slate-200 focus-within:bg-white focus-within:border-blue-300"
               : "bg-white/10 border-white/20 focus-within:bg-white focus-within:border-blue-300"
           }`}
         >
-          <Search size={20} className={isScrolled ? "text-slate-400" : "text-blue-200"} />
+          <Search size={20} className={useLightHeader ? "text-slate-400" : "text-blue-200"} />
           <input
             type="text"
             placeholder="Pesquisar..."
             className={`bg-transparent border-none outline-none text-base w-full font-medium ${
-              isScrolled
+              useLightHeader
                 ? "text-slate-700 placeholder:text-slate-400"
                 : "text-white placeholder:text-blue-200/50 focus:text-slate-800 focus:placeholder:text-slate-400"
             }`}
@@ -107,7 +111,7 @@ export default function Header() {
         {/* Notificações */}
         <button
           className={`p-3.5 rounded-2xl transition-all ${
-            isScrolled
+            useLightHeader
               ? "bg-slate-100 text-slate-500 hover:bg-slate-200 hover:text-slate-700"
               : "bg-white/10 text-white hover:bg-white/20"
           }`}
@@ -122,7 +126,7 @@ export default function Header() {
               id="btn-user-menu"
               onClick={() => setDropdownOpen((v) => !v)}
               className={`flex items-center gap-3.5 px-4 py-2.5 rounded-[24px] transition-all border font-bold text-base ${
-                isScrolled
+                useLightHeader
                   ? "bg-white border-slate-200 text-slate-700 hover:border-blue-300 hover:bg-blue-50 shadow-sm"
                   : "bg-white/15 border-white/25 text-white hover:bg-white/25"
               }`}
@@ -132,10 +136,10 @@ export default function Header() {
                 {initials}
               </div>
               <div className="hidden sm:flex flex-col items-start leading-tight">
-                <span className={`text-[10px] font-black uppercase tracking-widest ${isScrolled ? "text-slate-400" : "text-blue-200"}`}>
+                <span className={`text-[10px] font-black uppercase tracking-widest ${useLightHeader ? "text-slate-400" : "text-blue-200"}`}>
                   Acesso Gestor
                 </span>
-                <span className={`text-xs font-black ${isScrolled ? "text-slate-600" : "text-white"}`}>
+                <span className={`text-xs font-black ${useLightHeader ? "text-slate-600" : "text-white"}`}>
                   INEP {user.inep}
                 </span>
               </div>
@@ -189,7 +193,7 @@ export default function Header() {
             id="btn-entrar-header"
             onClick={() => router.push("/login")}
             className={`flex items-center gap-2.5 px-6 py-3.5 rounded-2xl transition-all font-black text-base uppercase tracking-widest active:scale-95 ${
-              isScrolled
+              useLightHeader
                 ? "bg-blue-600 text-white hover:bg-blue-700 shadow-md shadow-blue-200"
                 : "bg-white text-[#003B7E] hover:bg-blue-50"
             }`}
