@@ -17,6 +17,8 @@ import {
   Zap,
   GitCompare,
   Filter,
+  User,
+  GraduationCap,
 } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import { useAuth } from "@/context/AuthContext";
@@ -414,6 +416,24 @@ export default function IndicadoresGeraisPage() {
   const [statsAd, setStatsAd] = useState<GlobalStats | null>(null);
   const [isLoadingComp, setIsLoadingComp] = useState(false);
 
+  // Estados para Comparação Demográfica com a Rede
+  interface DemographicStats {
+    name: string;
+    schoolAvg: number;
+    schoolCount: number;
+    globalAvg: number;
+    globalCount: number;
+  }
+  const [schoolStudents, setSchoolStudents] = useState<any[]>([]);
+  const [demStats, setDemStats] = useState<{
+    regioes: DemographicStats[];
+    atendimentos: DemographicStats[];
+    racaCores: DemographicStats[];
+    rendas: DemographicStats[];
+  } | null>(null);
+  const [selectedDemographic, setSelectedDemographic] = useState<"regiao" | "atendimento" | "raca" | "renda">("regiao");
+  const [isLoadingGlobal, setIsLoadingGlobal] = useState(false);
+
   // Fetch gabarito
   useEffect(() => {
     async function fetchGabarito() {
@@ -430,6 +450,7 @@ export default function IndicadoresGeraisPage() {
       setIsLoading(true);
       try {
         const students = await fetchStudents(selectedAno, selectedAvaliacao, user.inep);
+        setSchoolStudents(students);
         setStats(calcStats(students));
         setTurmas(calcTurmas(students, selectedAno));
         setHabilidades(calcHabilidades(students, gabarito));
@@ -470,6 +491,150 @@ export default function IndicadoresGeraisPage() {
     }
     fetchComp();
   }, [activeTab, selectedAno, selectedAvaliacao, user?.inep]);
+
+  // Fetch global/network data for demographic comparison when in "comparacao" tab
+  useEffect(() => {
+    let cancelled = false;
+    async function fetchGlobalData() {
+      if (!user?.inep || activeTab !== "comparacao") return;
+      setIsLoadingGlobal(true);
+      try {
+        const isBim2 = selectedAvaliacao === "bim2_2026";
+        const tableName = `respostas_${selectedAno}ano_${selectedAvaliacao}`;
+        
+        let allGlobalData: any[] = [];
+        let from = 0;
+        let to = 999;
+        let hasMore = true;
+
+        while (hasMore && allGlobalData.length < 50000) {
+          const chunkQuery = isBim2
+            ? supabase.from("avaliacoes_bim2").select("*").eq("ano_escolar", selectedAno).range(from, to)
+            : supabase.from(tableName).select("*").range(from, to);
+          const { data: chunk, error: chunkErr } = await chunkQuery;
+
+          if (chunkErr) {
+            console.error("[ERRO] Fetch global chunk falhou:", chunkErr.message, chunkErr);
+            hasMore = false;
+          } else if (!chunk || chunk.length === 0) {
+            hasMore = false;
+          } else {
+            allGlobalData = [...allGlobalData, ...chunk.map((r: any) => isBim2 ? normalizeBim2Row(r) : r)];
+            from += 1000;
+            to += 1000;
+            if (chunk.length < 1000) hasMore = false;
+          }
+        }
+
+        if (cancelled) return;
+
+        // Process school vs global averages
+        const getStudentAverage = (r: any) => {
+          const getGradeVal = (val1: any, val2?: any) => {
+            const p1 = parseGrade(val1);
+            return p1 !== null ? p1 : parseGrade(val2);
+          };
+          const lgVal = getGradeVal(r.lg, r.lp);
+          const maVal = parseGrade(r.ma);
+          const cnVal = getGradeVal(r.cn, r.ci);
+          const chVal = parseGrade(r.ch);
+
+          const grades = [];
+          if (lgVal !== null) grades.push(lgVal);
+          if (maVal !== null) grades.push(maVal);
+          if (cnVal !== null) grades.push(cnVal);
+          if (chVal !== null) grades.push(chVal);
+
+          if (grades.length === 0) return null;
+          return grades.reduce((a, b) => a + b, 0) / grades.length;
+        };
+
+        // Helper to group by key
+        const computeDemographics = (
+          schoolData: any[],
+          globalData: any[],
+          keySelector: (r: any) => string | null
+        ) => {
+          const schoolMap: Record<string, { sum: number; count: number }> = {};
+          const globalMap: Record<string, { sum: number; count: number }> = {};
+
+          schoolData.forEach(r => {
+            const key = keySelector(r);
+            if (!key) return;
+            const avg = getStudentAverage(r);
+            if (avg === null) return;
+            if (!schoolMap[key]) schoolMap[key] = { sum: 0, count: 0 };
+            schoolMap[key].sum += avg;
+            schoolMap[key].count++;
+          });
+
+          globalData.forEach(r => {
+            const key = keySelector(r);
+            if (!key) return;
+            const avg = getStudentAverage(r);
+            if (avg === null) return;
+            if (!globalMap[key]) globalMap[key] = { sum: 0, count: 0 };
+            globalMap[key].sum += avg;
+            globalMap[key].count++;
+          });
+
+          // Combine keys
+          const allKeys = Array.from(new Set([...Object.keys(schoolMap), ...Object.keys(globalMap)]));
+          return allKeys.map(name => ({
+            name,
+            schoolAvg: schoolMap[name] ? schoolMap[name].sum / schoolMap[name].count : 0,
+            schoolCount: schoolMap[name] ? schoolMap[name].count : 0,
+            globalAvg: globalMap[name] ? globalMap[name].sum / globalMap[name].count : 0,
+            globalCount: globalMap[name] ? globalMap[name].count : 0,
+          }));
+        };
+
+        const regName = (r: any) => r.regiao ? r.regiao.toUpperCase().trim() : null;
+        const ateName = (r: any) => {
+          if (!r.atendimento) return null;
+          let name = r.atendimento.toUpperCase().trim();
+          if (name.includes("INTEGRAL")) return "INTEGRAL";
+          if (name.includes("PARCIAL")) return "PARCIAL";
+          return name;
+        };
+        const racaName = (r: any) => {
+          const val = r.raca_cor || r.corraca;
+          if (!val || val === "NULL" || val === "_") return null;
+          return val.toUpperCase().trim();
+        };
+        const rendaName = (r: any) => {
+          if (!r.renda || r.renda === "NULL" || r.renda === "_") return null;
+          return `GRUPO ${r.renda.toUpperCase().trim()}`;
+        };
+
+        setDemStats({
+          regioes: computeDemographics(schoolStudents, allGlobalData, regName),
+          atendimentos: computeDemographics(schoolStudents, allGlobalData, ateName),
+          racaCores: computeDemographics(schoolStudents, allGlobalData, racaName),
+          rendas: computeDemographics(schoolStudents, allGlobalData, rendaName),
+        });
+
+      } catch (err) {
+        console.error("Erro ao computar dados globais:", err);
+      } finally {
+        setIsLoadingGlobal(false);
+      }
+    }
+
+    fetchGlobalData();
+    return () => { cancelled = true; };
+  }, [activeTab, selectedAno, selectedAvaliacao, schoolStudents, user?.inep]);
+
+  const currentDemStats = useMemo(() => {
+    if (!demStats) return [];
+    let list: DemographicStats[] = [];
+    if (selectedDemographic === "regiao") list = demStats.regioes;
+    else if (selectedDemographic === "atendimento") list = demStats.atendimentos;
+    else if (selectedDemographic === "raca") list = demStats.racaCores;
+    else if (selectedDemographic === "renda") list = demStats.rendas;
+    
+    return list.filter(item => item.name && item.name !== "UNDEFINED" && (item.schoolAvg > 0 || item.globalAvg > 0));
+  }, [demStats, selectedDemographic]);
 
   // Auto-detect first year
   useEffect(() => {
@@ -1079,7 +1244,7 @@ export default function IndicadoresGeraisPage() {
                   {isLoadingComp ? (
                     <div className="p-20 text-center flex flex-col items-center gap-4">
                       <div className="w-10 h-10 border-4 border-blue-600/20 border-t-blue-600 rounded-full animate-spin" />
-                      <p className="font-bold text-slate-500">Carregando dados para comparação...</p>
+                      <p className="font-bold text-slate-500">Carregando dados para análise...</p>
                     </div>
                   ) : !statsComp ? (
                     <div className="p-20 text-center bg-white rounded-[32px] border border-slate-100">
@@ -1121,6 +1286,72 @@ export default function IndicadoresGeraisPage() {
                                 })}
                             </BarChart>
                           </ResponsiveContainer>
+                        </div>
+                      </div>
+
+                      {/* Comparação Demográfica com Médias Globais (Rede) */}
+                      <div className="bg-white rounded-[32px] border border-slate-100 shadow-sm overflow-hidden">
+                        <div className="p-8 border-b border-slate-100 bg-slate-50/50 flex flex-col md:flex-row md:items-center justify-between gap-6">
+                          <div>
+                            <h4 className="text-xl font-black text-slate-900 flex items-center gap-3">
+                              <Users size={20} className="text-blue-500" />
+                              Análise Demográfica com Médias Globais (Rede)
+                            </h4>
+                            <p className="text-xs text-slate-400 font-bold mt-1 uppercase tracking-widest">Analise as médias da sua escola com a média de toda a rede</p>
+                          </div>
+                          
+                          {/* Seletores demográficos */}
+                          <div className="flex bg-slate-100 p-1 rounded-2xl border border-slate-200 w-fit self-start md:self-auto">
+                            {[
+                              { id: "regiao", label: "Região" },
+                              { id: "atendimento", label: "Atendimento" },
+                              { id: "raca", label: "Raça/Cor" },
+                              { id: "renda", label: "Renda" }
+                            ].map((opt) => (
+                              <button
+                                key={opt.id}
+                                onClick={() => setSelectedDemographic(opt.id as any)}
+                                className={`px-4 py-2 rounded-xl text-xs font-black uppercase transition-all ${
+                                  selectedDemographic === opt.id
+                                    ? "bg-white text-blue-600 shadow-sm"
+                                    : "text-slate-500 hover:text-slate-700"
+                                }`}
+                              >
+                                {opt.label}
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+
+                        <div className="p-8">
+                          {isLoadingGlobal ? (
+                            <div className="p-16 text-center flex flex-col items-center gap-4">
+                              <div className="w-8 h-8 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin" />
+                              <p className="text-xs font-black text-slate-400 uppercase tracking-widest">Carregando dados globais da rede...</p>
+                            </div>
+                          ) : currentDemStats.length === 0 ? (
+                            <div className="p-16 text-center text-slate-300">
+                              <p className="text-sm font-black uppercase tracking-widest">Sem dados demográficos disponíveis para esta avaliação</p>
+                            </div>
+                          ) : (
+                            <ResponsiveContainer width="100%" height={340}>
+                              <BarChart data={currentDemStats} barGap={6} margin={{ top: 44, left: 0, right: 20, bottom: 0 }}>
+                                <XAxis dataKey="name" tick={{ fontWeight: 700, fontSize: 11, fill: "#64748b" }} axisLine={false} tickLine={false} />
+                                <YAxis domain={[0, 10]} tick={{ fontWeight: 700, fontSize: 11, fill: "#64748b" }} axisLine={false} tickLine={false} />
+                                <Tooltip
+                                  contentStyle={{ borderRadius: 16, border: "1px solid #e2e8f0", boxShadow: "0 4px 24px rgba(0,0,0,0.08)", fontWeight: 700, fontSize: 12 }}
+                                  formatter={(value: any, name: any) => [value.toFixed(2), name]}
+                                />
+                                <Legend wrapperStyle={{ fontWeight: 700, fontSize: 11, paddingTop: 16 }} />
+                                <Bar dataKey="schoolAvg" name="Média da Escola" fill="#2563eb" radius={[8, 8, 0, 0]} maxBarSize={36}>
+                                  <LabelList content={makeLabel("#2563eb")} />
+                                </Bar>
+                                <Bar dataKey="globalAvg" name="Média da Rede" fill="#10b981" radius={[8, 8, 0, 0]} maxBarSize={36}>
+                                  <LabelList content={makeLabel("#10b981")} />
+                                </Bar>
+                              </BarChart>
+                            </ResponsiveContainer>
+                          )}
                         </div>
                       </div>
                     </>

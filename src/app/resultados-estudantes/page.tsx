@@ -130,6 +130,8 @@ export default function ResultadosEstudantesPage() {
     rede: number;
     regioes: { name: string; avg: number; studentCount: number }[];
     atendimentos: { name: string; avg: number; studentCount: number }[];
+    racaCores: { name: string; avg: number; studentCount: number }[];
+    rendas: { name: string; avg: number; studentCount: number }[];
   } | null>(null);
 
   // Fetch data from Supabase based on selected year, evaluation, and INEP
@@ -268,6 +270,8 @@ export default function ResultadosEstudantesPage() {
           let totalCount = 0;
           const regMap: Record<string, { sum: number; count: number; studentCount: number }> = {};
           const ateMap: Record<string, { sum: number; count: number; studentCount: number }> = {};
+          const racaMap: Record<string, { sum: number; count: number; studentCount: number }> = {};
+          const rendaMap: Record<string, { sum: number; count: number; studentCount: number }> = {};
 
           allData.forEach(r => {
             const getGradeVal = (val1: any, val2?: any) => {
@@ -300,6 +304,19 @@ export default function ResultadosEstudantesPage() {
               ateMap[ateName].studentCount++;
             }
 
+            const racaVal = (r.raca_cor || r.corraca || "").trim().toUpperCase();
+            if (racaVal && racaVal !== "NULL" && racaVal !== "_") {
+              if (!racaMap[racaVal]) racaMap[racaVal] = { sum: 0, count: 0, studentCount: 0 };
+              racaMap[racaVal].studentCount++;
+            }
+
+            const rendaVal = (r.renda || "").trim().toUpperCase();
+            if (rendaVal && rendaVal !== "NULL" && rendaVal !== "_") {
+              const rendaLabel = `GRUPO ${rendaVal}`;
+              if (!rendaMap[rendaLabel]) rendaMap[rendaLabel] = { sum: 0, count: 0, studentCount: 0 };
+              rendaMap[rendaLabel].studentCount++;
+            }
+
             if (grades.length === 0) return;
 
             const sumGrades = grades.reduce((a, b) => a + b, 0);
@@ -321,6 +338,17 @@ export default function ResultadosEstudantesPage() {
               ateMap[ateName].sum += sumGrades;
               ateMap[ateName].count += countGrades;
             }
+
+            if (racaVal && racaVal !== "NULL" && racaVal !== "_") {
+              racaMap[racaVal].sum += sumGrades;
+              racaMap[racaVal].count += countGrades;
+            }
+
+            if (rendaVal && rendaVal !== "NULL" && rendaVal !== "_") {
+              const rendaLabel = `GRUPO ${rendaVal}`;
+              rendaMap[rendaLabel].sum += sumGrades;
+              rendaMap[rendaLabel].count += countGrades;
+            }
           });
 
           const redeAvg = totalCount > 0 ? totalSum / totalCount : 0;
@@ -336,6 +364,12 @@ export default function ResultadosEstudantesPage() {
                 .map(([name, d]) => ({ name, avg: d.count > 0 ? d.sum / d.count : 0, studentCount: d.studentCount }))
                 .sort((a, b) => b.avg - a.avg),
               atendimentos: Object.entries(ateMap)
+                .map(([name, d]) => ({ name, avg: d.count > 0 ? d.sum / d.count : 0, studentCount: d.studentCount }))
+                .sort((a, b) => b.avg - a.avg),
+              racaCores: Object.entries(racaMap)
+                .map(([name, d]) => ({ name, avg: d.count > 0 ? d.sum / d.count : 0, studentCount: d.studentCount }))
+                .sort((a, b) => b.avg - a.avg),
+              rendas: Object.entries(rendaMap)
                 .map(([name, d]) => ({ name, avg: d.count > 0 ? d.sum / d.count : 0, studentCount: d.studentCount }))
                 .sort((a, b) => b.avg - a.avg)
             });
@@ -658,15 +692,15 @@ export default function ResultadosEstudantesPage() {
               </div>
             </div>
 
-            {/* Linha 3: Gráficos de Inteligência Lateral (Região e Atendimento) */}
+            {/* Linha 3: Gráficos de Inteligência Lateral (Região, Atendimento, Raça/Cor, Renda) */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              {/* Card 1: Região */}
               <div className="bg-white p-10 rounded-[48px] border border-slate-200 shadow-sm group hover:border-blue-200 transition-all">
                 <div className="flex items-center gap-4 mb-10">
                   <div className="w-12 h-12 rounded-2xl bg-slate-50 text-slate-400 flex items-center justify-center group-hover:bg-blue-50 group-hover:text-blue-600 transition-colors">
                     <TrendingUp size={24} />
                   </div>
                   <div>
-                    <h5 className="text-[11px] font-black text-slate-400 uppercase tracking-[0.3em] mb-1">Inteligência</h5>
                     <p className="text-lg font-black text-slate-900">Média por Região</p>
                   </div>
                 </div>
@@ -700,13 +734,13 @@ export default function ResultadosEstudantesPage() {
                 </div>
               </div>
 
+              {/* Card 2: Atendimento */}
               <div className="bg-white p-10 rounded-[48px] border border-slate-200 shadow-sm group hover:border-indigo-200 transition-all">
                 <div className="flex items-center gap-4 mb-10">
                   <div className="w-12 h-12 rounded-2xl bg-slate-50 text-slate-400 flex items-center justify-center group-hover:bg-indigo-50 group-hover:text-indigo-600 transition-colors">
                     <Users size={24} />
                   </div>
                   <div>
-                    <h5 className="text-[11px] font-black text-slate-400 uppercase tracking-[0.3em] mb-1">Inteligência</h5>
                     <p className="text-lg font-black text-slate-900">Média por Atendimento</p>
                   </div>
                 </div>
@@ -733,6 +767,86 @@ export default function ResultadosEstudantesPage() {
                         <div 
                           className="h-full bg-gradient-to-r from-indigo-600 to-indigo-400 rounded-full transition-all duration-1000 shadow-lg"
                           style={{ width: `${(ate.avg / 10) * 100}%` }}
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Card 3: Raça/Cor */}
+              <div className="bg-white p-10 rounded-[48px] border border-slate-200 shadow-sm group hover:border-amber-200 transition-all">
+                <div className="flex items-center gap-4 mb-10">
+                  <div className="w-12 h-12 rounded-2xl bg-slate-50 text-slate-400 flex items-center justify-center group-hover:bg-amber-50 group-hover:text-amber-600 transition-colors">
+                    <User size={24} />
+                  </div>
+                  <div>
+                    <p className="text-lg font-black text-slate-900">Média por Raça/Cor</p>
+                  </div>
+                </div>
+                <div className="space-y-6">
+                  {isLoadingGlobal ? (
+                    <div className="flex flex-col items-center gap-3 py-8">
+                      <div className="w-8 h-8 border-4 border-amber-200 border-t-amber-600 rounded-full animate-spin" />
+                      <p className="text-[11px] font-black text-slate-400 uppercase tracking-widest">Carregando...</p>
+                    </div>
+                  ) : !globalStats?.racaCores?.length ? (
+                    <div className="flex flex-col items-center gap-2 py-8 text-slate-300">
+                      <p className="text-[12px] font-black uppercase tracking-widest">Sem dados disponíveis</p>
+                    </div>
+                  ) : globalStats.racaCores.map((rc, i) => (
+                    <div key={i} className="space-y-2.5">
+                      <div className="flex justify-between items-end">
+                        <div className="flex items-center gap-3">
+                          <span className="text-[12px] font-black uppercase text-slate-500">{rc.name}</span>
+                          <span className="text-[10px] font-bold text-slate-400 bg-slate-100 px-2 py-0.5 rounded-full">{rc.studentCount} estudantes</span>
+                        </div>
+                        <span className="text-xl font-black text-slate-900">{rc.avg.toFixed(2)}</span>
+                      </div>
+                      <div className="h-3 bg-slate-100 rounded-full overflow-hidden shadow-inner">
+                        <div 
+                          className="h-full bg-gradient-to-r from-amber-600 to-amber-400 rounded-full transition-all duration-1000 shadow-lg"
+                          style={{ width: `${(rc.avg / 10) * 100}%` }}
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Card 4: Renda */}
+              <div className="bg-white p-10 rounded-[48px] border border-slate-200 shadow-sm group hover:border-emerald-200 transition-all">
+                <div className="flex items-center gap-4 mb-10">
+                  <div className="w-12 h-12 rounded-2xl bg-slate-50 text-slate-400 flex items-center justify-center group-hover:bg-emerald-50 group-hover:text-emerald-600 transition-colors">
+                    <GraduationCap size={24} />
+                  </div>
+                  <div>
+                    <p className="text-lg font-black text-slate-900">Média por Renda</p>
+                  </div>
+                </div>
+                <div className="space-y-6">
+                  {isLoadingGlobal ? (
+                    <div className="flex flex-col items-center gap-3 py-8">
+                      <div className="w-8 h-8 border-4 border-emerald-200 border-t-emerald-600 rounded-full animate-spin" />
+                      <p className="text-[11px] font-black text-slate-400 uppercase tracking-widest">Carregando...</p>
+                    </div>
+                  ) : !globalStats?.rendas?.length ? (
+                    <div className="flex flex-col items-center gap-2 py-8 text-slate-300">
+                      <p className="text-[12px] font-black uppercase tracking-widest">Sem dados disponíveis</p>
+                    </div>
+                  ) : globalStats.rendas.map((rd, i) => (
+                    <div key={i} className="space-y-2.5">
+                      <div className="flex justify-between items-end">
+                        <div className="flex items-center gap-3">
+                          <span className="text-[12px] font-black uppercase text-slate-500">{rd.name}</span>
+                          <span className="text-[10px] font-bold text-slate-400 bg-slate-100 px-2 py-0.5 rounded-full">{rd.studentCount} estudantes</span>
+                        </div>
+                        <span className="text-xl font-black text-slate-900">{rd.avg.toFixed(2)}</span>
+                      </div>
+                      <div className="h-3 bg-slate-100 rounded-full overflow-hidden shadow-inner">
+                        <div 
+                          className="h-full bg-gradient-to-r from-emerald-600 to-emerald-400 rounded-full transition-all duration-1000 shadow-lg"
+                          style={{ width: `${(rd.avg / 10) * 100}%` }}
                         />
                       </div>
                     </div>

@@ -167,7 +167,7 @@ export default function Home() {
               <ResultButton label="ESTUDANTES" color="bg-[#003B7E]" />
             </Link>
 
-            <Link href="/resultados" className="grid gap-4 cursor-pointer">
+            <Link href="/resultados-estudantes" className="grid gap-4 cursor-pointer">
               <ResultButton label="RAÇA/COR" color="bg-[#000096]" />
               <ResultButton label="ATENDIMENTO" color="bg-[#00d2ff]" />
               <ResultButton label="REGIÃO" color="bg-[#FFD200]" />
